@@ -276,7 +276,7 @@ export function useCourseAnimations(rootRef) {
           {
             xPercent: 7,
             scale: 1.07,
-            autoAlpha: 0,
+            autoAlpha: 0.72,
             clipPath: "inset(8% 0 8% 18% round 52px)",
             duration: 1.35,
           },
