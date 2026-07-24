@@ -330,14 +330,6 @@ export function useCourseAnimations(rootRef) {
             scrub: 0.72,
           },
         })
-          .fromTo(closing, {
-            scale: 0.96,
-            clipPath: "inset(9% 3% 9% 3% round 64px)",
-          }, {
-            scale: 1,
-            clipPath: "inset(0% 0% 0% 0% round 0px)",
-            ease: "none",
-          }, 0)
           .fromTo(closingInner, {
             y: 150,
             scale: 0.78,
