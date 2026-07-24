@@ -1,13 +1,13 @@
 :root {
   color-scheme: dark;
   font-family: "SF Pro Display", "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
-  color: #f3f6f3;
+  color: #fbfff9;
   background: #050706;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
-  --ink: #f3f6f3;
-  --ink-soft: #c8d0cb;
-  --muted: #919b95;
+  --ink: #fbfff9;
+  --ink-soft: #e0e8e2;
+  --muted: #bdc8c0;
   --line: rgba(255, 255, 255, 0.13);
   --paper: #050706;
   --paper-strong: #0b0e0c;
@@ -307,14 +307,23 @@ img {
   background: #f3f5f2;
 }
 
-.hero-visual {
+.hero-media {
   position: absolute;
   z-index: -1;
-  inset: 0 0 0 auto;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.hero-visual {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
+  pointer-events: none;
 }
 
 .hero-copy {
@@ -1390,10 +1399,72 @@ footer {
   overflow: hidden;
 }
 
-.hero-visual {
-  opacity: 0.72;
-  filter: invert(1) hue-rotate(180deg) saturate(1.16) contrast(1.12) brightness(0.72);
+.hero-media {
+  opacity: 1;
+  filter: none;
+  mix-blend-mode: normal;
+}
+
+.hero-visual--base {
+  z-index: 0;
+}
+
+.hero-visual--flow {
+  z-index: 1;
+  opacity: 0.55;
+  filter: brightness(1.9) contrast(1.18) saturate(1.75);
   mix-blend-mode: screen;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  will-change: transform, opacity, -webkit-mask-position, mask-position;
+}
+
+.hero-visual--flow-a {
+  -webkit-mask-image: linear-gradient(104deg, transparent 0%, transparent 40%, #fff 49%, transparent 58%, transparent 100%);
+  mask-image: linear-gradient(104deg, transparent 0%, transparent 40%, #fff 49%, transparent 58%, transparent 100%);
+  -webkit-mask-size: 38% 100%;
+  mask-size: 38% 100%;
+}
+
+.hero-visual--flow-b {
+  -webkit-mask-image: linear-gradient(76deg, transparent 0%, transparent 43%, #fff 50%, transparent 57%, transparent 100%);
+  mask-image: linear-gradient(76deg, transparent 0%, transparent 43%, #fff 50%, transparent 57%, transparent 100%);
+  -webkit-mask-size: 29% 100%;
+  mask-size: 29% 100%;
+}
+
+.kinetic-title__char {
+  display: inline-block;
+  transform-origin: 50% 82%;
+  will-change: transform, opacity;
+}
+
+.kinetic-title__char[data-tone="silver"] {
+  color: #fbfff4;
+}
+
+.kinetic-title__char[data-tone="green"] {
+  color: #42f478;
+  text-shadow: 0 0 28px rgba(10, 228, 72, 0.22);
+}
+
+.kinetic-title__char[data-tone="sky"] {
+  color: #8fdcff;
+  text-shadow: 0 0 26px rgba(93, 201, 255, 0.18);
+}
+
+.kinetic-title__char[data-tone="amber"] {
+  color: #ffc56f;
+  text-shadow: 0 0 24px rgba(255, 174, 68, 0.16);
+}
+
+.kinetic-title__char[data-tone="violet"] {
+  color: #cdb5ff;
+  text-shadow: 0 0 24px rgba(184, 139, 255, 0.16);
+}
+
+.kinetic-title__char.is-space {
+  width: 0.28em;
 }
 
 .hero-copy {
@@ -1415,6 +1486,35 @@ footer {
 .section-heading.inverse .eyebrow,
 .section-heading.inverse p {
   color: var(--ink);
+}
+
+.section-heading p,
+.section-heading.inverse p,
+.manifesto-steps p,
+.role-list p,
+.case-result li,
+.safety-rules p,
+.settings-card__heading > p,
+.settings-card__items p,
+.chapter-detail__lead > p,
+.chapter-detail__grid p,
+.chapter-detail__grid li {
+  color: var(--muted);
+}
+
+[data-scene="settings"] .eyebrow,
+[data-scene="feishu"] .eyebrow {
+  color: #8fdcff;
+}
+
+[data-scene="skill-market"] .eyebrow,
+[data-scene="guides"] .section-index {
+  color: #ffc56f;
+}
+
+[data-scene="safety"] .eyebrow,
+[data-scene="closing"] .eyebrow {
+  color: #cdb5ff;
 }
 
 .manifesto-steps,
@@ -1492,8 +1592,8 @@ footer {
 }
 
 .skill-market-image-wrap img {
-  opacity: 0.76;
-  filter: brightness(0.7) contrast(1.12) saturate(0.78);
+  opacity: 1;
+  filter: none;
 }
 
 .lab-downloads,
@@ -1589,7 +1689,8 @@ footer {
   max-height: 690px;
   object-fit: cover;
   object-position: left top;
-  filter: brightness(0.78) contrast(1.06);
+  opacity: 1;
+  filter: none;
 }
 
 .settings-screenshot figcaption {
@@ -2039,11 +2140,13 @@ footer {
     padding-top: 130px;
   }
 
-  .hero-visual {
+  .hero-media {
     top: 260px;
     height: 66%;
+  }
+
+  .hero-visual {
     object-position: 67% center;
-    opacity: 0.82;
   }
 
   .hero-copy {
@@ -2201,7 +2304,7 @@ footer {
     line-height: 0.96;
   }
 
-  .hero-visual {
+  .hero-media {
     top: 360px;
     height: 55%;
   }
@@ -2293,6 +2396,10 @@ footer {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .hero-visual--flow {
+    display: none;
+  }
+
   html {
     scroll-behavior: auto;
   }

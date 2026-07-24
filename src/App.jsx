@@ -107,12 +107,27 @@ export function App() {
       <ProgressRail activeSection={activeSection} />
 
       <section id="overview" className="hero-section section-anchor" data-scene="hero">
-        <img
-          className="hero-visual"
-          data-hero-visual
-          src={`${base}assets/hero-silver-workflow.png`}
-          alt="银白玻璃工作流从 Codex 对话连接到管理层汇报"
-        />
+        <div className="hero-media" data-hero-visual>
+          <img
+            className="hero-visual hero-visual--base"
+            src={`${base}assets/hero-bright-workflow-v3.png`}
+            alt="高亮银白玻璃工作流从 Codex 对话连接到管理层汇报"
+          />
+          <img
+            className="hero-visual hero-visual--flow hero-visual--flow-a"
+            data-hero-flow
+            src={`${base}assets/hero-bright-workflow-v3.png`}
+            alt=""
+            aria-hidden="true"
+          />
+          <img
+            className="hero-visual hero-visual--flow hero-visual--flow-b"
+            data-hero-flow
+            src={`${base}assets/hero-bright-workflow-v3.png`}
+            alt=""
+            aria-hidden="true"
+          />
+        </div>
         <div className="hero-copy" data-hero-copy>
           <span className="eyebrow">财运学院 · AI 实践课</span>
           <h1>把复杂工作，<br />变成一条清晰路径</h1>

@@ -8,6 +8,8 @@ const MOTION_TARGETS = [
   "[data-nav]",
   "[data-hero-copy]",
   "[data-hero-visual]",
+  "[data-hero-flow]",
+  "[data-kinetic-char]",
   "[data-scroll-progress]",
   "[data-reveal]",
   "[data-stagger] > *",
@@ -31,6 +33,63 @@ const MOTION_TARGETS = [
   ".guide-file-list > a",
   ".closing-section > div",
 ].join(",");
+
+function prepareKineticTitles(root) {
+  const snapshots = [];
+  const titles = Array.from(root.querySelectorAll("[data-scene] h1, [data-scene] h2"));
+  const toneCycle = [
+    "silver", "silver", "green", "silver", "sky", "silver",
+    "silver", "amber", "silver", "violet", "silver", "silver",
+  ];
+
+  const wrapTextNodes = (node, glyphState) => {
+    Array.from(node.childNodes).forEach((child) => {
+      if (child.nodeType === 3) {
+        const fragment = document.createDocumentFragment();
+        Array.from(child.textContent || "").forEach((character) => {
+          const span = document.createElement("span");
+          span.className = character.trim()
+            ? "kinetic-title__char"
+            : "kinetic-title__char is-space";
+          span.dataset.kineticChar = "";
+          span.setAttribute("aria-hidden", "true");
+          if (character.trim()) {
+            span.dataset.tone = toneCycle[glyphState.index % toneCycle.length];
+            glyphState.index += 1;
+          }
+          span.textContent = character === " " ? "\u00a0" : character;
+          fragment.appendChild(span);
+        });
+        child.replaceWith(fragment);
+        return;
+      }
+
+      if (child.nodeType === 1 && child.tagName !== "BR") {
+        wrapTextNodes(child, glyphState);
+      }
+    });
+  };
+
+  titles.forEach((title, index) => {
+    const originalHtml = title.innerHTML;
+    const originalAriaLabel = title.getAttribute("aria-label");
+    const label = (title.textContent || "").replace(/\s+/g, " ").trim();
+
+    snapshots.push({ title, originalHtml, originalAriaLabel });
+    title.dataset.kineticTitle = String(index);
+    if (label) title.setAttribute("aria-label", label);
+    wrapTextNodes(title, { index: 0 });
+  });
+
+  return () => {
+    snapshots.forEach(({ title, originalHtml, originalAriaLabel }) => {
+      title.innerHTML = originalHtml;
+      title.removeAttribute("data-kinetic-title");
+      if (originalAriaLabel === null) title.removeAttribute("aria-label");
+      else title.setAttribute("aria-label", originalAriaLabel);
+    });
+  };
+}
 
 function scheduleRefresh() {
   let refreshCall;
@@ -60,6 +119,7 @@ export function useCourseAnimations(rootRef) {
 
     let media;
     const refresh = scheduleRefresh();
+    const restoreKineticTitles = prepareKineticTitles(root);
     const images = Array.from(root.querySelectorAll("img"));
     const imageListeners = [];
 
@@ -128,6 +188,39 @@ export function useCourseAnimations(rootRef) {
         });
       };
 
+      const animateKineticTitle = (title, trigger = title, scrollTrigger = {}) => {
+        if (!title) return null;
+        const characters = gsap.utils.toArray("[data-kinetic-char]", title);
+        if (!characters.length) return null;
+
+        return gsap.fromTo(
+          characters,
+          {
+            autoAlpha: 0,
+            x: (index) => ((index % 5) - 2) * 11,
+            yPercent: (index) => (index % 2 ? 128 : -112),
+            rotation: (index) => (index % 2 ? 16 : -14),
+            scale: (index) => (index % 3 ? 0.72 : 1.18),
+          },
+          {
+            autoAlpha: 1,
+            x: 0,
+            yPercent: 0,
+            rotation: 0,
+            scale: 1,
+            duration: 1.24,
+            stagger: { each: 0.026, from: "edges" },
+            ease: "elastic.out(1, 0.52)",
+            scrollTrigger: {
+              trigger,
+              start: "top 86%",
+              once: true,
+              ...scrollTrigger,
+            },
+          },
+        );
+      };
+
       gsap.to("[data-scroll-progress]", {
         scaleX: 1,
         transformOrigin: "left center",
@@ -143,6 +236,8 @@ export function useCourseAnimations(rootRef) {
       const nav = select("[data-nav]");
       const heroCopyChildren = selectAll("[data-hero-copy] > *");
       const heroVisual = select("[data-hero-visual]");
+      const heroFlowLayers = selectAll("[data-hero-flow]");
+      const heroTitleChars = selectAll("#overview h1 [data-kinetic-char]");
       const heroMeta = select(".hero-meta");
 
       const opening = gsap.timeline({ defaults: { ease: "power3.out" } });
@@ -159,6 +254,22 @@ export function useCourseAnimations(rootRef) {
           "-=0.34",
         );
       }
+      if (heroTitleChars.length) {
+        opening.from(
+          heroTitleChars,
+          {
+            autoAlpha: 0,
+            x: (index) => ((index % 5) - 2) * 15,
+            yPercent: (index) => (index % 2 ? 135 : -118),
+            rotation: (index) => (index % 2 ? 18 : -16),
+            scale: (index) => (index % 3 ? 0.7 : 1.2),
+            duration: 1.28,
+            stagger: { each: 0.03, from: "edges" },
+            ease: "elastic.out(1, 0.5)",
+          },
+          "-=0.82",
+        );
+      }
       if (heroVisual) {
         opening.from(
           heroVisual,
@@ -172,6 +283,38 @@ export function useCourseAnimations(rootRef) {
           "-=1.05",
         );
       }
+
+      heroFlowLayers.forEach((layer, index) => {
+        gsap.fromTo(
+          layer,
+          {
+            autoAlpha: index === 0 ? 0.18 : 0.1,
+            webkitMaskPosition: index === 0 ? "-55% 0%" : "145% 0%",
+            maskPosition: index === 0 ? "-55% 0%" : "145% 0%",
+          },
+          {
+            autoAlpha: index === 0 ? 0.72 : 0.48,
+            webkitMaskPosition: index === 0 ? "155% 0%" : "-55% 0%",
+            maskPosition: index === 0 ? "155% 0%" : "-55% 0%",
+            duration: index === 0 ? 3.2 : 4.4,
+            repeat: -1,
+            ease: "none",
+          },
+        );
+        gsap.to(layer, {
+          xPercent: index === 0 ? 1.8 : -1.2,
+          yPercent: index === 0 ? -0.8 : 1.1,
+          scale: index === 0 ? 1.018 : 1.012,
+          duration: index === 0 ? 2.7 : 3.6,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
+      });
+
+      selectAll("[data-kinetic-title]")
+        .filter((title) => !title.closest("#overview") && !title.closest(".capability-panel"))
+        .forEach((title) => animateKineticTitle(title, title));
 
       media = gsap.matchMedia();
 
@@ -442,6 +585,10 @@ export function useCourseAnimations(rootRef) {
                 },
               },
             );
+            animateKineticTitle(panel.querySelector("h2"), panel, {
+              containerAnimation: horizontalTween,
+              start: "left 82%",
+            });
           });
         }
 
@@ -782,6 +929,7 @@ export function useCourseAnimations(rootRef) {
               once: true,
             },
           });
+          animateKineticTitle(panel.querySelector("h2"), panel, { start: "top 88%" });
         });
 
         const skillImageWrap = select(".skill-market-image-wrap");
@@ -832,6 +980,7 @@ export function useCourseAnimations(rootRef) {
       refresh.cleanup();
       media?.revert();
       context.revert();
+      restoreKineticTitles();
     };
   }, [rootRef]);
 }
