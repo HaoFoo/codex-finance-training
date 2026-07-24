@@ -382,6 +382,32 @@ export function useCourseAnimations(rootRef) {
         });
       }
 
+      // 大标题入场落定后进入持续的逐字弹跳（延续入场的跳动感）：快速弹起、落地带回弹、错峰荡开成涟漪
+      // 标签页在前台就一直动，切到后台 rAF 停摆自动冻结
+      const perpetualTitleWave = (chars) => {
+        if (!chars?.length) return null;
+        return gsap.to(chars, {
+          yPercent: -22,
+          duration: 0.5,
+          ease: "power2.out",
+          yoyo: true,
+          yoyoEase: "bounce.out",
+          repeat: -1,
+          repeatDelay: 0.85,
+          stagger: { each: 0.055, from: "start" },
+          paused: true,
+        });
+      };
+
+      const heroTitleWave = perpetualTitleWave(heroTitleChars);
+      if (heroTitleWave) {
+        // 入场结束再启动波浪，避免和落定动画抢同一批字符
+        opening.eventCallback("onComplete", () => {
+          heroTitleWave.play();
+          heroLoopTweens.push(heroTitleWave);
+        });
+      }
+
       selectAll("[data-kinetic-title]")
         .filter((title) => !title.closest("#overview") && !title.closest(".capability-panel"))
         .forEach((title) => animateKineticTitle(title, title));
@@ -442,6 +468,19 @@ export function useCourseAnimations(rootRef) {
             start: "top bottom",
             end: "bottom top",
             onToggle: (self) => (self.isActive ? pulse.play() : pulse.pause()),
+          });
+        }
+
+        const closingTitleWave = perpetualTitleWave(selectAll("#closing h2 [data-kinetic-char]"));
+        if (closingTitleWave) {
+          ScrollTrigger.create({
+            trigger: closing,
+            start: "top 55%",
+            end: "bottom top",
+            onEnter: () => closingTitleWave.play(),
+            onEnterBack: () => closingTitleWave.play(),
+            onLeave: () => closingTitleWave.pause(),
+            onLeaveBack: () => closingTitleWave.pause(),
           });
         }
       }
