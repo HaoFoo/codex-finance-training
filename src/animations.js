@@ -316,6 +316,68 @@ export function useCourseAnimations(rootRef) {
         .filter((title) => !title.closest("#overview") && !title.closest(".capability-panel"))
         .forEach((title) => animateKineticTitle(title, title));
 
+      const closing = select(".closing-section");
+      const closingInner = closing?.querySelector(":scope > div");
+      const closingEyebrow = closing?.querySelector(".eyebrow");
+      const closingCopy = closing?.querySelector("p");
+      const closingButton = closing?.querySelector(".primary-button");
+      if (closing && closingInner) {
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: closing,
+            start: "top 88%",
+            end: "center 50%",
+            scrub: 0.72,
+          },
+        })
+          .fromTo(closing, {
+            scale: 0.96,
+            clipPath: "inset(9% 3% 9% 3% round 64px)",
+          }, {
+            scale: 1,
+            clipPath: "inset(0% 0% 0% 0% round 0px)",
+            ease: "none",
+          }, 0)
+          .fromTo(closingInner, {
+            y: 150,
+            scale: 0.78,
+            autoAlpha: 0.18,
+          }, {
+            y: 0,
+            scale: 1,
+            autoAlpha: 1,
+            ease: "power3.out",
+          }, 0)
+          .from(closingEyebrow, {
+            y: 34,
+            letterSpacing: "0.38em",
+            autoAlpha: 0,
+            ease: "power3.out",
+          }, 0.16)
+          .from(closingCopy, {
+            y: 44,
+            autoAlpha: 0,
+            ease: "power3.out",
+          }, 0.32)
+          .from(closingButton, {
+            y: 42,
+            scale: 0.62,
+            autoAlpha: 0,
+            ease: "back.out(1.7)",
+          }, 0.42);
+
+        if (closingButton) {
+          gsap.to(closingButton, {
+            scale: 1.035,
+            boxShadow: "0 0 0 14px rgba(10, 228, 72, 0.05), 0 18px 60px rgba(10, 228, 72, 0.3)",
+            duration: 1.2,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+          });
+        }
+      }
+
       media = gsap.matchMedia();
 
       media.add("(min-width: 900px)", () => {
@@ -828,33 +890,6 @@ export function useCourseAnimations(rootRef) {
             }, 0.1);
         }
 
-        const closing = select(".closing-section");
-        const closingInner = closing?.querySelector(":scope > div");
-        if (closing && closingInner) {
-          gsap.timeline({
-            scrollTrigger: {
-              trigger: closing,
-              start: "top top",
-              end: "+=68%",
-              pin: true,
-              pinSpacing: true,
-              scrub: 0.82,
-              anticipatePin: 1,
-            },
-          })
-            .fromTo(closingInner, {
-              scale: 0.58,
-              autoAlpha: 0.18,
-              y: 110,
-              clipPath: "inset(20% 12% 20% 12% round 64px)",
-            }, {
-              scale: 1,
-              autoAlpha: 1,
-              y: 0,
-              clipPath: "inset(0% 0% 0% 0% round 0px)",
-              ease: "power2.out",
-            }, 0);
-        }
       });
 
       media.add("(max-width: 899px)", () => {
@@ -873,7 +908,7 @@ export function useCourseAnimations(rootRef) {
         }
 
         const mobileHeadings = selectAll(
-          ".section-heading, .manifesto-copy, .skill-market-copy, .safety-title, .guide-library-copy, .closing-section > div",
+          ".section-heading, .manifesto-copy, .skill-market-copy, .safety-title, .guide-library-copy",
         );
         mobileHeadings.forEach((heading) => revealHeading(heading, heading));
 

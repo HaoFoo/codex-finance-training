@@ -465,11 +465,11 @@ export function App() {
 
       <section className="closing-section" data-scene="closing">
         <div data-reveal>
-          <span className="eyebrow">最后一个动作</span>
-          <h2>不要只收藏这门课。<br />现在就运行一个任务。</h2>
-          <p>从模拟材料开始，让 Codex 交付第一个可审阅成果。</p>
+          <span className="eyebrow">课程结束 · 行动开始</span>
+          <h2>今天不是课程的终点。<br />是你和 Codex 一起交付的起点。</h2>
+          <p>运行第一个任务，把一次成果沉淀成下一次可复用的团队能力。</p>
           <button className="primary-button" type="button" onClick={() => jumpTo("labs")}>
-            <Play size={19} weight="fill" /> 开始实战
+            <Play size={19} weight="fill" /> 启动第一个任务
           </button>
         </div>
       </section>
