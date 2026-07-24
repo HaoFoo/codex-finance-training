@@ -674,14 +674,11 @@ export function useCourseAnimations(rootRef) {
           revealHeading(settingsStage.querySelector(".section-heading"), settingsStage);
 
           if (settingsPanels.length === 1 && !settingsPanels[0].matches("[data-settings-card]")) {
+            // 只做轻微位移视差，不再淡入整块面板——避免截图首次进入时灰蒙蒙
             gsap.fromTo(settingsPanels[0], {
-              y: 70,
-              scale: 0.94,
-              autoAlpha: 0.45,
+              y: 48,
             }, {
-              y: -34,
-              scale: 1,
-              autoAlpha: 1,
+              y: -24,
               ease: "none",
               scrollTrigger: {
                 trigger: settingsStage,

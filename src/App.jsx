@@ -143,7 +143,7 @@ export function App() {
         </div>
         <div className="hero-meta" data-hero-copy>
           <span>90 分钟</span>
-          <span>50 人线下实操</span>
+          <span>线下实操</span>
           <span>Mac 现场演示</span>
         </div>
       </section>
