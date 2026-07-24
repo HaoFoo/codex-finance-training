@@ -44,7 +44,6 @@ const labFiles = [
 const guideFiles = [
   ["完整课程文档", "16 章功能、概念、案例与安全边界", "course-outline.html"],
   ["Codex 桌面端设置详解", "逐项解释权限、集成、编码与个性化设置", "codex-desktop-guide.html"],
-  ["90 分钟讲师 Runbook", "逐段讲稿、演示动作、时间盒与 fallback", "instructor-runbook.html"],
   ["33 组可复制提示词", "从只读检查到最终验收的完整 Prompt Pack", "prompt-pack.html"],
   ["课前检查清单", "安装、Workspace、飞书 CLI、网络与安全确认", "preclass-checklist.html"],
   ["课后自学路径", "四级能力成长路线与五团队岗位分支", "self-study.html"],

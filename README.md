@@ -19,7 +19,8 @@ npm run test:sites
 ## 目录
 
 - `src/`：React 页面、交互与 GSAP 滚动动画
-- `content/`：课程大纲、讲师手册、Prompt Pack、课前检查与自学路径（Markdown 源文件）
+- `content/`：课程大纲、Prompt Pack、课前检查与自学路径（Markdown 源文件，随网站公开分享）
+- `internal/`：讲师内部材料（Runbook 等），不入库、不发布
 - `content/codex-desktop-guide.md`：Codex Desktop 功能与设置逐项详解
 - `public/labs/`：课堂演示用的脱敏模拟材料
 - `public/guides/`：由 `content/` 渲染出的站点风格 HTML 文档 + Markdown 下载版（`npm run build:content` 生成，请勿手改）
