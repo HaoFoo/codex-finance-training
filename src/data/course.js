@@ -18,6 +18,7 @@ import {
 export const navigation = [
   { id: "overview", label: "课程概览" },
   { id: "basics", label: "快速入门" },
+  { id: "settings", label: "设置详解" },
   { id: "capabilities", label: "进阶能力" },
   { id: "case", label: "贯穿案例" },
   { id: "labs", label: "实战练习" },
@@ -199,4 +200,3 @@ export const resourceLinks = [
     label: "进入学习中心",
   },
 ];
-

@@ -5,6 +5,16 @@ export default defineConfig({
   base: process.env.GITHUB_ACTIONS ? "/codex-finance-training/" : "/",
   build: {
     outDir: "dist/client",
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes("/gsap/")) return "motion";
+          if (id.includes("/@phosphor-icons/")) return "icons";
+          if (id.includes("/react/") || id.includes("/react-dom/")) return "react";
+          return undefined;
+        },
+      },
+    },
   },
   optimizeDeps: {
     include: ["react", "react-dom/client"],

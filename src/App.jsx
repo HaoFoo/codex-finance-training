@@ -13,7 +13,9 @@ import {
 } from "@phosphor-icons/react";
 import { useEffect, useRef, useState } from "react";
 import { useCourseAnimations } from "./animations";
+import { CapabilityManual } from "./components/CapabilityManual";
 import { CapabilityRail } from "./components/CapabilityRail";
+import { ChapterDetailBlock } from "./components/ChapterDetailBlock";
 import { Header } from "./components/Header";
 import { ProgressRail } from "./components/ProgressRail";
 import { PromptCard } from "./components/PromptCard";
@@ -25,6 +27,8 @@ import {
   roles,
 } from "./data/course";
 import { demoPrompts } from "./data/prompts";
+import { chapterDetails } from "./data/chapterDetails";
+import { settingsGroups } from "./data/settings";
 
 const base = import.meta.env.BASE_URL;
 
@@ -39,11 +43,25 @@ const labFiles = [
 
 const guideFiles = [
   ["完整课程文档", "16 章功能、概念、案例与安全边界", "course-outline.md"],
+  ["Codex 桌面端设置详解", "逐项解释权限、集成、编码与个性化设置", "codex-desktop-guide.md"],
   ["90 分钟讲师 Runbook", "逐段讲稿、演示动作、时间盒与 fallback", "instructor-runbook.md"],
   ["32 组可复制提示词", "从第一次任务到最终验收的完整 Prompt Pack", "prompt-pack.md"],
   ["课前检查清单", "安装、Workspace、飞书 CLI、网络与安全确认", "preclass-checklist.md"],
   ["课后自学路径", "四级能力成长路线与五团队岗位分支", "self-study.md"],
 ];
+
+const chapterById = Object.fromEntries(chapterDetails.map((chapter) => [chapter.id, chapter]));
+const capabilityChapters = [
+  "prompt",
+  "skills",
+  "plugins",
+  "subagents",
+  "superpowers",
+  "agents-md",
+  "browser",
+  "automation",
+  "delivery",
+].map((id) => chapterById[id]).filter(Boolean);
 
 function SectionHeading({ index, eyebrow, title, body, inverse = false }) {
   return (
@@ -88,7 +106,7 @@ export function App() {
       <Header activeSection={activeSection} />
       <ProgressRail activeSection={activeSection} />
 
-      <section id="overview" className="hero-section section-anchor">
+      <section id="overview" className="hero-section section-anchor" data-scene="hero">
         <img
           className="hero-visual"
           data-hero-visual
@@ -116,7 +134,7 @@ export function App() {
         </div>
       </section>
 
-      <section id="overview-story" className="manifesto-section">
+      <section id="overview-story" className="manifesto-section" data-scene="mindset">
         <div className="manifesto-copy" data-reveal>
           <span className="eyebrow accent">先建立一个正确认知</span>
           <p>Codex 不是“更会聊天的 AI”。</p>
@@ -135,9 +153,10 @@ export function App() {
             </article>
           ))}
         </div>
+        <ChapterDetailBlock chapter={chapterById.overview} />
       </section>
 
-      <section id="basics" className="basics-section section-anchor">
+      <section id="basics" className="basics-section section-anchor" data-scene="basics">
         <SectionHeading
           index="01"
           eyebrow="快速入门"
@@ -178,13 +197,76 @@ export function App() {
             </div>
           </div>
         </div>
+        <ChapterDetailBlock chapter={chapterById.basics} />
       </section>
 
-      <section id="capabilities" className="capabilities-section section-anchor">
+      <section id="settings" className="settings-section section-anchor" data-settings-stage data-scene="settings">
+        <SectionHeading
+          index="02"
+          eyebrow="Codex 桌面端设置"
+          title="每一个开关，都对应一条能力边界"
+          body="这不是设置项清单。你要理解它会改变什么、什么时候应该开启，以及打开以后由谁承担确认责任。"
+        />
+
+        <div className="settings-layout">
+          <aside className="settings-nav" data-settings-nav aria-label="设置分组">
+            {settingsGroups.map((group) => {
+              const Icon = group.icon;
+              return (
+                <div key={group.key}>
+                  <Icon size={20} weight="duotone" />
+                  <span>{group.label}</span>
+                </div>
+              );
+            })}
+          </aside>
+
+          <div className="settings-panel" data-settings-panel>
+            <figure className="settings-screenshot" data-reveal>
+              <a href={`${base}assets/codex-settings-overview.png`} target="_blank" rel="noreferrer">
+                <img src={`${base}assets/codex-settings-overview.png`} alt="Codex 桌面端设置页面，包含常规、集成、编码与归档设置导航" />
+              </a>
+              <figcaption><span>你当前客户端的栏目可能因版本和公司封装而不同；功能解释以实际界面与管理员策略为准。</span><strong>点击查看原图</strong></figcaption>
+            </figure>
+
+            <div className="settings-card-stack">
+              {settingsGroups.map((group) => {
+                const Icon = group.icon;
+                return (
+                  <article className="settings-card" data-settings-card key={group.key}>
+                    <div className="settings-card__heading">
+                      <div><Icon size={30} weight="duotone" /></div>
+                      <span className="eyebrow accent">{group.eyebrow}</span>
+                      <h3>{group.title}</h3>
+                      <p>{group.summary}</p>
+                    </div>
+                    <div className="settings-card__items">
+                      {group.items.map((item) => (
+                        <div key={item.name}>
+                          <strong>{item.name}</strong>
+                          <p>{item.detail}</p>
+                        </div>
+                      ))}
+                    </div>
+                    <p className="settings-card__recommendation"><CheckCircle size={20} weight="fill" />{group.recommendation}</p>
+                  </article>
+                );
+              })}
+            </div>
+
+            <a className="outline-button settings-guide-link" href={`${base}guides/codex-desktop-guide.md`} target="_blank" rel="noreferrer">
+              打开《Codex 桌面端功能与设置详解》 <BookOpenText size={20} />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="capabilities" className="capabilities-section section-anchor" data-scene="capabilities">
         <CapabilityRail />
+        <CapabilityManual chapters={capabilityChapters} />
       </section>
 
-      <section id="case" className="case-section section-anchor">
+      <section id="case" className="case-section section-anchor" data-scene="case">
         <SectionHeading
           index="02"
           eyebrow="贯穿案例"
@@ -218,9 +300,10 @@ export function App() {
             </button>
           </aside>
         </div>
+        <ChapterDetailBlock chapter={chapterById.case} />
       </section>
 
-      <section className="skill-market-section" data-skill-stage>
+      <section className="skill-market-section" data-skill-stage data-scene="skill-market">
         <div className="skill-market-copy" data-reveal>
           <span className="section-index">Skill discovery</span>
           <span className="eyebrow accent">优先内部，再扩展 GitHub</span>
@@ -244,7 +327,7 @@ export function App() {
         </div>
       </section>
 
-      <section id="labs" className="labs-section section-anchor">
+      <section id="labs" className="labs-section section-anchor" data-scene="labs">
         <SectionHeading
           index="03"
           eyebrow="实战练习"
@@ -272,9 +355,10 @@ export function App() {
         <div className="prompt-grid">
           {demoPrompts.map((item) => <PromptCard key={item.id} item={item} />)}
         </div>
+        <ChapterDetailBlock chapter={chapterById.labs} />
       </section>
 
-      <section className="feishu-section">
+      <section className="feishu-section" data-scene="feishu">
         <SectionHeading
           index="04"
           eyebrow="飞书 CLI"
@@ -296,9 +380,10 @@ export function App() {
         <a className="outline-button" href="https://www.feishu.cn/community/prompts?id=7649306513806216122&from=ug_from_subscribe_update" target="_blank" rel="noreferrer">
           查看《Codex × 飞书 CLI 实战指南》 <ArrowRight size={19} />
         </a>
+        <ChapterDetailBlock chapter={chapterById.feishu} />
       </section>
 
-      <section className="safety-section">
+      <section className="safety-section" data-scene="safety">
         <div className="safety-title" data-reveal>
           <ShieldCheck size={42} weight="duotone" />
           <div><span className="eyebrow">安全边界</span><h2>能力越强，确认点越清楚</h2></div>
@@ -313,9 +398,10 @@ export function App() {
             <article key={title}><LockKey size={24} weight="duotone" /><h3>{title}</h3><p>{text}</p></article>
           ))}
         </div>
+        <ChapterDetailBlock chapter={chapterById.safety} />
       </section>
 
-      <section className="learning-section">
+      <section className="learning-section" data-scene="learning">
         <SectionHeading
           index="05"
           eyebrow="学习路径"
@@ -341,9 +427,10 @@ export function App() {
             </a>
           ))}
         </div>
+        <ChapterDetailBlock chapter={chapterById.learning} />
       </section>
 
-      <section className="guide-library-section">
+      <section className="guide-library-section" data-scene="guides">
         <div className="guide-library-copy" data-reveal>
           <span className="section-index">课程资料库</span>
           <h2>现场看主线，<br />网站保留完整深度</h2>
@@ -361,7 +448,7 @@ export function App() {
         </div>
       </section>
 
-      <section className="closing-section">
+      <section className="closing-section" data-scene="closing">
         <div data-reveal>
           <span className="eyebrow">最后一个动作</span>
           <h2>不要只收藏这门课。<br />现在就运行一个任务。</h2>

@@ -11,8 +11,11 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 ## Project-specific direction
 
 - All user-facing course content and navigation must be Chinese. Product names such as Codex, GSAP, Skill, Plugin, MCP, API and GitHub may remain in English where that is the commonly recognized term.
-- The selected visual source is `design/references/selected-visual.png`: a bright silver-white product stage with oversized Chinese typography, translucent glass workflow ribbons, Codex UI, and finance-green accents.
-- Every major course chapter should have meaningful GSAP-assisted scroll motion. Use ScrollTrigger, scrub, pin, stagger, masks, and horizontal sequencing where they improve the narrative.
+- The original composition reference is `design/references/selected-visual.png`, especially its oversized Chinese typography, translucent workflow ribbons, Codex UI, and finance-green accents. The user later made a stronger global color decision: reinterpret this composition in a GSAP-homepage-inspired black / charcoal stage with silver-white typography and finance-green energy accents.
+- Every major course chapter must have its own meaningful GSAP-assisted motion grammar. Use ScrollTrigger, scrub, pin, stagger, masks, depth/scale, horizontal sequencing, counters, and chapter transitions where they improve the narrative; do not repeat the same generic fade-in pattern across the site.
+- Motion should feel like Apple product-film editing: each chapter has a deliberate establishing shot, focus transition, and exit handoff. Keep the effects DOM- and asset-driven, performant, and readable.
+- Keep one visual system across the entire website. Use black / charcoal as the dominant background for every chapter, with silver-white glass surfaces and finance-green energy accents. Do not alternate whole black and white chapters.
+- Website chapter content should be detailed enough to teach a novice without the instructor filling every gap. Each major topic should explain what it is, when to use it, how to do it, an example or demo, and a mistake/safety boundary where relevant.
 - Preserve teaching usability despite the motion: chapter navigation, prompt copy buttons, downloadable lab files, reduced-motion support, keyboard focus, and readable Chinese body copy are required.
-- GitHub Pages is the publication target. The repository is private and the app must work from a project subpath with static assets referenced through Vite-safe URLs.
+- GitHub Pages is the publication target. The repository is public with the user's explicit approval, and the app must work from a project subpath with static assets referenced through Vite-safe URLs.
 - Never expose API keys, tokens, personal account details, or confidential business data. All exercises use simulated and sanitized files.

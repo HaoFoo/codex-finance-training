@@ -1,6 +1,6 @@
 # 财运中心 Codex 实战课
 
-一套面向法务、行政、财务、税务与经营分析团队的中文 Codex 培训网站。课程采用 90 分钟线下演示主线，并提供完整的桌面端基础、Skills、Subagents、Superpowers、Plugins/MCP、飞书 CLI、自动化与 GitHub 协作课后材料。
+一套面向法务、行政、财务、税务与经营分析团队的中文 Codex 培训网站。课程采用 90 分钟线下演示主线，并提供完整的桌面端设置、Skills、Subagents、Superpowers、Plugins/MCP、飞书 CLI、自动化与 GitHub 协作课后材料。网站使用统一黑色舞台和分章 GSAP 滚动叙事。
 
 ## 本地运行
 
@@ -20,6 +20,7 @@ npm run test:sites
 
 - `src/`：React 页面、交互与 GSAP 滚动动画
 - `content/`：课程大纲、讲师手册、Prompt Pack、课前检查与自学路径
+- `content/codex-desktop-guide.md`：Codex Desktop 功能与设置逐项详解
 - `public/labs/`：课堂演示用的脱敏模拟材料
 - `public/guides/`：网站内可直接打开的完整课程文档
 - `design/`：视觉参考与 QA 记录
