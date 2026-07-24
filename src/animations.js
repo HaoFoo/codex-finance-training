@@ -399,6 +399,21 @@ export function useCourseAnimations(rootRef) {
         });
       };
 
+      // 其他章节标题的持续动效更克制：小幅上浮 + 轻微缩放的“呼吸感”，从中心平滑荡开，不带落地弹跳
+      const perpetualTitleBreath = (chars) => {
+        if (!chars?.length) return null;
+        return gsap.to(chars, {
+          yPercent: -5,
+          scale: 1.02,
+          duration: 1.9,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: -1,
+          stagger: { each: 0.05, from: "center" },
+          paused: true,
+        });
+      };
+
       const heroTitleWave = perpetualTitleWave(heroTitleChars);
       if (heroTitleWave) {
         // 入场结束再启动波浪，避免和落定动画抢同一批字符
@@ -410,7 +425,22 @@ export function useCourseAnimations(rootRef) {
 
       selectAll("[data-kinetic-title]")
         .filter((title) => !title.closest("#overview") && !title.closest(".capability-panel"))
-        .forEach((title) => animateKineticTitle(title, title));
+        .forEach((title) => {
+          animateKineticTitle(title, title);
+          const breath = perpetualTitleBreath(gsap.utils.toArray("[data-kinetic-char]", title));
+          if (breath) {
+            // 入场弹入落定后再开始呼吸；标题只在视口内动，滚出即停
+            ScrollTrigger.create({
+              trigger: title,
+              start: "top 62%",
+              end: "bottom top",
+              onEnter: () => breath.play(),
+              onEnterBack: () => breath.play(),
+              onLeave: () => breath.pause(),
+              onLeaveBack: () => breath.pause(),
+            });
+          }
+        });
 
       const closing = select(".closing-section");
       const closingInner = closing?.querySelector(":scope > div");
