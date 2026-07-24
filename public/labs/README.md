@@ -17,7 +17,7 @@
 
 ## 建议练习顺序
 
-1. 下载本目录全部文件，放进同一个本地文件夹。
+1. 下载 `codex-labs.zip` 并解压，得到 `codex-labs` 课程材料文件夹（也可以逐个下载文件放进同一个文件夹）。
 2. 在 Codex 中选择该文件夹作为 workspace。
 3. 打开 `prompts.md`，先运行 Prompt 1，确认 Codex 可以读取文件。
 4. 运行 Prompt 3，观察五个 Subagents 如何并行分析及合并结论。

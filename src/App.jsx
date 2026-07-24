@@ -42,12 +42,12 @@ const labFiles = [
 ];
 
 const guideFiles = [
-  ["完整课程文档", "16 章功能、概念、案例与安全边界", "course-outline.md"],
-  ["Codex 桌面端设置详解", "逐项解释权限、集成、编码与个性化设置", "codex-desktop-guide.md"],
-  ["90 分钟讲师 Runbook", "逐段讲稿、演示动作、时间盒与 fallback", "instructor-runbook.md"],
-  ["32 组可复制提示词", "从第一次任务到最终验收的完整 Prompt Pack", "prompt-pack.md"],
-  ["课前检查清单", "安装、Workspace、飞书 CLI、网络与安全确认", "preclass-checklist.md"],
-  ["课后自学路径", "四级能力成长路线与五团队岗位分支", "self-study.md"],
+  ["完整课程文档", "16 章功能、概念、案例与安全边界", "course-outline.html"],
+  ["Codex 桌面端设置详解", "逐项解释权限、集成、编码与个性化设置", "codex-desktop-guide.html"],
+  ["90 分钟讲师 Runbook", "逐段讲稿、演示动作、时间盒与 fallback", "instructor-runbook.html"],
+  ["33 组可复制提示词", "从只读检查到最终验收的完整 Prompt Pack", "prompt-pack.html"],
+  ["课前检查清单", "安装、Workspace、飞书 CLI、网络与安全确认", "preclass-checklist.html"],
+  ["课后自学路径", "四级能力成长路线与五团队岗位分支", "self-study.html"],
 ];
 
 const chapterById = Object.fromEntries(chapterDetails.map((chapter) => [chapter.id, chapter]));
@@ -110,20 +110,20 @@ export function App() {
         <div className="hero-media" data-hero-visual>
           <img
             className="hero-visual hero-visual--base"
-            src={`${base}assets/hero-bright-workflow-v3.png`}
+            src={`${base}assets/hero-bright-workflow-v3.webp`}
             alt="高亮银白玻璃工作流从 Codex 对话连接到管理层汇报"
           />
           <img
             className="hero-visual hero-visual--flow hero-visual--flow-a"
             data-hero-flow
-            src={`${base}assets/hero-bright-workflow-v3.png`}
+            src={`${base}assets/hero-bright-workflow-v3.webp`}
             alt=""
             aria-hidden="true"
           />
           <img
             className="hero-visual hero-visual--flow hero-visual--flow-b"
             data-hero-flow
-            src={`${base}assets/hero-bright-workflow-v3.png`}
+            src={`${base}assets/hero-bright-workflow-v3.webp`}
             alt=""
             aria-hidden="true"
           />
@@ -180,12 +180,17 @@ export function App() {
         />
 
         <div className="desktop-stage" data-reveal>
-          <div className="desktop-stage__sidebar">
+          <div className="desktop-stage__sidebar" aria-hidden="true">
             <strong>Codex</strong>
             {desktopEntries.map((entry, index) => {
               const Icon = entry.icon;
               return (
-                <button className={index === 0 ? "is-selected" : ""} type="button" key={entry.title}>
+                <button
+                  className={index === 0 ? "is-selected" : ""}
+                  type="button"
+                  tabIndex={-1}
+                  key={entry.title}
+                >
                   <Icon size={19} weight="duotone" /> {entry.title}
                 </button>
               );
@@ -197,7 +202,7 @@ export function App() {
             <div className="composer-preview">
               <p>读取 labs 中的模拟材料，生成月度经营复盘。</p>
               <span>目标清楚 · 材料明确 · 完成标准可验证</span>
-              <button type="button" aria-label="发送模拟任务"><ArrowRight size={20} /></button>
+              <button type="button" aria-hidden="true" tabIndex={-1}><ArrowRight size={20} /></button>
             </div>
             <div className="desktop-explanations" data-stagger>
               {desktopEntries.map((entry) => {
@@ -238,8 +243,8 @@ export function App() {
 
           <div className="settings-panel" data-settings-panel>
             <figure className="settings-screenshot" data-reveal>
-              <a href={`${base}assets/codex-settings-overview.png`} target="_blank" rel="noreferrer">
-                <img src={`${base}assets/codex-settings-overview.png`} alt="Codex 桌面端设置页面，包含常规、集成、编码与归档设置导航" />
+              <a href={`${base}assets/codex-settings-overview.webp`} target="_blank" rel="noreferrer">
+                <img src={`${base}assets/codex-settings-overview.webp`} alt="Codex 桌面端设置页面，包含常规、集成、编码与归档设置导航" />
               </a>
               <figcaption><span>你当前客户端的栏目可能因版本和公司封装而不同；功能解释以实际界面与管理员策略为准。</span><strong>点击查看原图</strong></figcaption>
             </figure>
@@ -269,7 +274,7 @@ export function App() {
               })}
             </div>
 
-            <a className="outline-button settings-guide-link" href={`${base}guides/codex-desktop-guide.md`} target="_blank" rel="noreferrer">
+            <a className="outline-button settings-guide-link" href={`${base}guides/codex-desktop-guide.html`} target="_blank" rel="noreferrer">
               打开《Codex 桌面端功能与设置详解》 <BookOpenText size={20} />
             </a>
           </div>
@@ -283,7 +288,7 @@ export function App() {
 
       <section id="case" className="case-section section-anchor" data-scene="case">
         <SectionHeading
-          index="02"
+          index="03"
           eyebrow="贯穿案例"
           title="一个任务，唤醒五个专业视角"
           body="月度经营复盘把本地文件、Subagents、Skills、管理层汇报和飞书交付串成一条完整主线。"
@@ -336,7 +341,7 @@ export function App() {
         <div className="skill-market-image-wrap" data-reveal>
           <img
             data-skill-image
-            src={`${base}assets/internal-skill-market.png`}
+            src={`${base}assets/internal-skill-market.webp`}
             alt="瓶子星球 Skill 市场，展示技能分类、搜索和安装入口"
           />
         </div>
@@ -344,7 +349,7 @@ export function App() {
 
       <section id="labs" className="labs-section section-anchor" data-scene="labs">
         <SectionHeading
-          index="03"
+          index="04"
           eyebrow="实战练习"
           title="复制一个提示词，拿到一个真实成果"
           body="现场 success criteria：至少成功运行一个 demo prompt，生成本地成果或飞书成果。"
@@ -353,8 +358,16 @@ export function App() {
         <div className="lab-downloads" data-stagger>
           <div className="lab-downloads__intro">
             <FolderOpen size={32} weight="duotone" />
-            <div><h3>模拟材料包</h3><p>全部为虚构、脱敏数据，可直接下载到同一目录后交给 Codex。</p></div>
+            <div><h3>模拟材料包</h3><p>全部为虚构、脱敏数据，解压后把整个文件夹交给 Codex 作为 Workspace。</p></div>
           </div>
+          <a className="lab-downloads__all" href={`${base}codex-labs.zip`} download>
+            <DownloadSimple size={26} weight="duotone" />
+            <span>
+              <strong>一键下载全部材料</strong>
+              <small>codex-labs.zip · 含 9 个文件，解压得到 codex-labs 课程材料文件夹</small>
+            </span>
+            <ArrowRight size={19} />
+          </a>
           {labFiles.map((item) => {
             const Icon = item.icon;
             return (
@@ -375,7 +388,7 @@ export function App() {
 
       <section className="feishu-section" data-scene="feishu">
         <SectionHeading
-          index="04"
+          index="05"
           eyebrow="飞书 CLI"
           title="让成果离开本地，进入团队协作"
           body="课前完成安装与授权，课堂只调用；配置问题统一参考飞书实战指南，会后自行补齐。"
@@ -418,7 +431,7 @@ export function App() {
 
       <section className="learning-section" data-scene="learning">
         <SectionHeading
-          index="05"
+          index="06"
           eyebrow="学习路径"
           title="90 分钟只是起点"
           body="先完成一个成果，再把高频任务逐步变成 Prompt、Skill 和 Automation。"

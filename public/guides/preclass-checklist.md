@@ -21,9 +21,8 @@
 ### 2. 课程网站与实验材料
 
 - [ ] 可以打开本次培训网站。
-- [ ] 已下载或取得课程实验包。
-- [ ] 可以看到 `public/labs/` 目录。
-- [ ] 目录中至少包含以下模拟文件：
+- [ ] 已从网站下载 `codex-labs.zip` 并解压，得到 `codex-labs` 课程材料文件夹。
+- [ ] 文件夹中至少包含以下模拟文件：
   - `01-operating-metrics.csv`
   - `02-budget-variance.csv`
   - `03-contract-risk.md`
@@ -36,11 +35,11 @@
 
 ### 3. Workspace 读写测试
 
-- [ ] 在 Codex 中新建 Task，并将课程目录设为 Workspace。
+- [ ] 在 Codex 中新建 Task，并将解压后的 `codex-labs` 文件夹设为 Workspace。
 - [ ] 复制下面的测试 Prompt：
 
 ```text
-请只读列出当前 Workspace 中 `public/labs/` 下的文件，不要修改、移动或创建任何文件。最后告诉我共识别到多少个文件。
+请只读列出当前 Workspace 中的全部文件，不要修改、移动或创建任何文件。最后告诉我共识别到多少个文件。
 ```
 
 - [ ] Codex 能列出文件，没有报告路径或权限错误。
@@ -61,7 +60,7 @@
 ### 5. 网络与 Skill 来源
 
 - [ ] 可以访问内部 Skill 市场 `https://skills.ijovo.com/`。
-- [ ] 已知 GitHub 无法直接访问时，应先参考 [Finance Learning Hub](internal-learning-hub) 的“科学上网”课程。
+- [ ] 已知 GitHub 无法直接访问时，应先完成内部学习中心（Finance Learning Hub）的“科学上网”课程；入口不对外公开，请查看内部群公告或联系管理员。
 - [ ] 不在课堂临时下载来源不明的 Skill。
 - [ ] 安装第三方 Skill 前会检查作者、更新时间、LICENSE、权限、脚本、依赖与网络访问。
 - [ ] 我知道 Superpowers 是 GitHub 上的第三方 Skills / Plugin 项目，不是 Codex 内置功能。
@@ -79,7 +78,7 @@
 
 ```text
 打开 Codex → 新建 Task → 选择课程 Workspace
-→ 只读列出 public/labs 文件 → 得到正常结果
+→ 只读列出课程材料文件 → 得到正常结果
 ```
 
 请在培训开始前选择一种状态：
@@ -102,7 +101,7 @@
 
 - [ ] 公司封装版 Codex Desktop 已登录。
 - [ ] 新建 Task、读取 Workspace、创建输出文件均已实测。
-- [ ] `public/labs/` 中所有模拟文件可正常解析。
+- [ ] `codex-labs` 中所有模拟文件可正常解析。
 - [ ] 所有现场 Prompt 已 dry run，并有预生成成果。
 - [ ] Superpowers 当前安装状态、版本和调用方式已实测。
 - [ ] Subagents 在当前演示环境可用；不可用时已有顺序执行录屏。
@@ -159,7 +158,7 @@ Codex 版本：
 执行动作：
 错误原文：
 是否能新建 Task：
-是否能读取 public/labs：
+是否能读取课程材料文件夹：
 是否涉及飞书 CLI：
 已尝试的非破坏性步骤：
 脱敏截图：

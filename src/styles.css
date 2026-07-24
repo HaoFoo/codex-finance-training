@@ -931,6 +931,22 @@ img {
   grid-column: span 3;
 }
 
+.lab-downloads > .lab-downloads__all {
+  grid-column: span 3;
+  background: rgba(10, 228, 72, 0.09);
+}
+
+.lab-downloads > .lab-downloads__all:hover {
+  background: rgba(10, 228, 72, 0.16);
+}
+
+.lab-downloads__all span {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+}
+
 .lab-downloads__intro svg,
 .lab-downloads > a > svg:first-child {
   flex: 0 0 auto;
@@ -990,6 +1006,8 @@ img {
 
 .prompt-card {
   min-width: 0;
+  display: flex;
+  flex-direction: column;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   overflow: hidden;
@@ -1033,6 +1051,7 @@ img {
 
 .prompt-card pre {
   min-height: 330px;
+  flex: 1;
   margin: 0;
   padding: 28px;
   overflow: auto;
@@ -1444,6 +1463,11 @@ footer {
   mask-size: 29% 100%;
 }
 
+.kinetic-title__word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
 .kinetic-title__char {
   display: inline-block;
   transform-origin: 50% 82%;
@@ -1773,6 +1797,11 @@ footer {
   padding: 24px;
   border-right: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
+}
+
+/* 奇数个条目时，最后一项占满整行，避免网格留出空洞 */
+.settings-card__items > div:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
 }
 
 .settings-card__items strong {

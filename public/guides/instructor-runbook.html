@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<meta name="theme-color" content="#050706" />
+<link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+<title>Codex for Finance｜90 分钟讲师 Runbook｜Codex 财运智能工作流</title>
+<style>
+  :root {
+    color-scheme: dark;
+    --ink: #fbfff9;
+    --muted: #bdc8c0;
+    --line: rgba(255, 255, 255, 0.13);
+    --green: #0ae448;
+    --stage: #050706;
+    --panel: rgba(255, 255, 255, 0.055);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--stage);
+    color: var(--ink);
+    font-family: "SF Pro Display", "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.85;
+    font-size: 16px;
+  }
+  .guide-top {
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px clamp(20px, 4vw, 44px);
+    background: rgba(5, 7, 6, 0.9);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+  }
+  .guide-top a {
+    color: var(--muted);
+    text-decoration: none;
+    padding: 6px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .guide-top a:hover { color: var(--green); border-color: rgba(10, 228, 72, 0.5); }
+  main {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: clamp(36px, 6vw, 72px) clamp(20px, 4vw, 44px) 120px;
+  }
+  h1 { font-size: clamp(30px, 4.6vw, 44px); letter-spacing: -0.03em; line-height: 1.25; margin: 0 0 28px; }
+  h2 { font-size: clamp(23px, 3vw, 30px); letter-spacing: -0.02em; margin: 62px 0 18px; padding-top: 26px; border-top: 1px solid var(--line); }
+  h3 { font-size: 20px; margin: 40px 0 12px; }
+  h4 { font-size: 17px; margin: 30px 0 10px; color: var(--green); }
+  p, li { color: #dbe3dd; }
+  strong { color: var(--ink); }
+  a { color: var(--green); }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 48px 0; }
+  blockquote {
+    margin: 22px 0;
+    padding: 14px 22px;
+    border-left: 3px solid var(--green);
+    background: var(--panel);
+    border-radius: 0 14px 14px 0;
+    color: var(--muted);
+  }
+  blockquote p { margin: 0; }
+  code {
+    font-family: "SFMono-Regular", "Cascadia Code", "PingFang SC", monospace;
+    font-size: 0.88em;
+    background: rgba(255, 255, 255, 0.09);
+    border-radius: 6px;
+    padding: 2px 7px;
+  }
+  pre {
+    background: #0b0e0c;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 22px 24px;
+    overflow-x: auto;
+    line-height: 1.75;
+  }
+  pre code { background: none; padding: 0; font-size: 13px; color: #d9dfdb; }
+  table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+    margin: 26px 0;
+    font-size: 15px;
+  }
+  th, td { border: 1px solid var(--line); padding: 10px 14px; text-align: left; vertical-align: top; }
+  th { background: var(--panel); color: var(--ink); white-space: nowrap; }
+  input[type="checkbox"] { accent-color: var(--green); margin-right: 8px; }
+  li { margin: 6px 0; }
+  img { max-width: 100%; }
+</style>
+</head>
+<body>
+<div class="guide-top">
+  <a href="../">← 返回课程网站</a>
+  <a href="./instructor-runbook.md" download>下载 Markdown 版</a>
+</div>
+<main>
+<h1>Codex for Finance｜90 分钟讲师 Runbook</h1>
+<h2>使用说明</h2>
+<p>本 Runbook 面向 50 人线下培训，讲师使用 Mac 演示，无助教。学员以 AI 与 Codex 新手为主，课前原则上已完成公司封装版 Codex Desktop 与飞书 CLI 配置。</p>
+<p>现场目标不是覆盖所有功能，而是让学员完成一次“输入材料 → 指挥 Codex → 检查过程 → 验收成果”的闭环，并对 Skills、Subagents、Superpowers、Sites 与飞书连接产生清晰认知。</p>
+<h2>现场成功标准</h2>
+<ul>
+<li>80% 以上学员在 90 分钟内至少成功运行一个课程 Prompt。</li>
+<li>每位完成者产出一个本地文件或飞书测试成果。</li>
+<li>学员知道外部写操作前要确认，知道关键数字必须追溯来源。</li>
+<li>学员知道遇到未知 Skill 时先查内部 Skill 市场，再按课程指引访问 GitHub、评估后安装。</li>
+</ul>
+<h2>讲师课前准备</h2>
+<h3>T-1 天</h3>
+<ul>
+<li>完整 dry run 一次，控制在 80 分钟内，为现场波动预留 10 分钟。</li>
+<li>将网站、实验包和关键页面预先打开，确认 GitHub Pages 子路径下资源可加载。</li>
+<li>在 Mac 上确认 Codex Desktop 已登录，能新建 Task、读取课程目录并写入输出目录。</li>
+<li>确认课程目录只包含模拟材料，不包含真实业务文件、Token 或个人路径截图。</li>
+<li>确认飞书 CLI 在测试空间可读取和创建测试文档，并可操作测试 Base。</li>
+<li>确认 Superpowers 已安装或准备 60 秒录屏 / 截图作为 fallback。</li>
+<li>预先运行所有 Demo，保留一套“预期成果”用于断网或工具故障时展示。</li>
+<li>关闭消息通知、邮箱弹窗与无关应用；浏览器退出个人敏感页面。</li>
+<li>将显示缩放、Cursor 大小与浏览器字号调大，后排可以看清。</li>
+</ul>
+<h3>T-30 分钟</h3>
+<ul>
+<li>连接投影、音频和电源；确认分辨率不会裁切 Codex 工具栏。</li>
+<li>打开以下页面，但不要展示含个人信息的标签页：<ul>
+<li>培训网站首页</li>
+<li>课前检查页</li>
+<li>Prompt Pack</li>
+<li>内部 Skill 市场 <code>https://skills.ijovo.com/</code></li>
+<li>Finance Learning Hub（内部学习中心，入口见内部群公告）</li>
+<li>飞书测试文档与测试 Base</li>
+</ul>
+</li>
+<li>打开本地课程材料文件夹 <code>codex-labs/</code>。</li>
+<li>将 <code>outputs/</code> 目录清空或使用新的演示输出目录；不要删除学员文件。</li>
+<li>准备计时器，设置 5 分钟、25 分钟、65 分钟三个提醒点。</li>
+</ul>
+<h2>90 分钟总节奏</h2>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>模块</th>
+<th>主要结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>00:00–00:05</td>
+<td>开场与规则</td>
+<td>学员打开 Codex 和实验包，理解成功标准</td>
+</tr>
+<tr>
+<td>00:05–00:15</td>
+<td>Codex Desktop 基础</td>
+<td>会新建 Task、选择 Workspace、看 Plan / Tool / Diff</td>
+</tr>
+<tr>
+<td>00:15–00:25</td>
+<td>第一次跟做</td>
+<td>用一个 Prompt 生成本地成果</td>
+</tr>
+<tr>
+<td>00:25–00:37</td>
+<td>多文件经营复盘</td>
+<td>看到 Codex 读取、分析、验证多份文件</td>
+</tr>
+<tr>
+<td>00:37–00:49</td>
+<td>Subagents 并行分析</td>
+<td>五类角色并行输出并由主 Agent 汇总</td>
+</tr>
+<tr>
+<td>00:49–00:59</td>
+<td>Skills 与 Superpowers</td>
+<td>会调用、发现、评估 Skill，理解第三方 workflow</td>
+</tr>
+<tr>
+<td>00:59–01:09</td>
+<td>现场创建 Skill</td>
+<td>将重复流程封装成可复用 Skill</td>
+</tr>
+<tr>
+<td>01:09–01:18</td>
+<td>生成交互网页</td>
+<td>从复盘成果生成本地中文专题页</td>
+</tr>
+<tr>
+<td>01:18–01:26</td>
+<td>飞书交付</td>
+<td>创建 / 读取文档并写入测试 Base</td>
+</tr>
+<tr>
+<td>01:26–01:30</td>
+<td>总结与挑战</td>
+<td>完成自检，知道课后路径</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>时间盒原则：任何单点安装或账号问题超过 60 秒，立即切换到 fallback，不让 49 人等待 1 人。</p>
+</blockquote>
+<hr>
+<h2>00:00–00:05｜开场：今天不是来听功能列表</h2>
+<h3>讲师目标</h3>
+<ul>
+<li>建立课程期待。</li>
+<li>让所有学员进入同一个安全练习环境。</li>
+</ul>
+<h3>讲师话术</h3>
+<blockquote>
+<p>今天我们只检验一件事：你能不能把一个真实工作任务交给 Codex，并拿到一个自己检查过的成果。不会写代码没有关系。你需要做的是把目标、材料、边界和验收标准说清楚。</p>
+<p>今天所有练习都使用模拟数据。不要把 API key、Token、密码、真实合同、真实员工信息或未脱敏业务数据放进 Prompt。任何发送、发布、覆盖和批量写入操作，都先让 Codex 说明影响范围，再由你确认。</p>
+</blockquote>
+<h3>演示动作</h3>
+<ol>
+<li>展示课程首页的能力链路动画。</li>
+<li>指向“下载实验材料”“复制 Prompt”“课前检查”入口。</li>
+<li>让学员打开 Codex Desktop 和课程实验目录。</li>
+</ol>
+<h3>学员动作</h3>
+<ul>
+<li>举手确认：Codex 已打开、实验包可见。</li>
+<li>未安装完成的学员与邻座结对观看，课后按网站完成安装。</li>
+</ul>
+<h3>Fallback</h3>
+<ul>
+<li>网站不可访问：使用本地构建版或 PDF / 截图备份。</li>
+<li>少数学员未安装：不现场排查；安排结对观看并记录课后补装。</li>
+<li>大面积未安装：讲师继续演示，最后 10 分钟改为集中安装说明，不做飞书写入。</li>
+</ul>
+<hr>
+<h2>00:05–00:15｜基础：看懂 Codex Desktop</h2>
+<h3>讲师目标</h3>
+<ul>
+<li>解释“新建任务、Workspace、Plan、Tool call、Diff、Terminal、Pull Request、Sites”。</li>
+<li>演示一次安全的任务启动与验收。</li>
+</ul>
+<h3>讲师话术</h3>
+<blockquote>
+<p>一个 Task 对应一次明确工作。Workspace 决定 Codex 可以看到和修改哪些本地文件，所以范围越清楚越安全。</p>
+<p>对复杂任务，我会先让它读目录并出 Plan。执行时关注三样东西：调用了什么工具、改了哪些文件、验证有没有通过。Pull Request 是代码审阅入口；Sites 是把网页成果交付为站点。它们不是每个办公任务都必须使用。</p>
+</blockquote>
+<h3>演示动作</h3>
+<ol>
+<li>点击“新建任务”。</li>
+<li>选择课程实验目录，不选择个人主目录。</li>
+<li>输入：</li>
+</ol>
+<pre><code class="language-text">请先只读检查当前目录：列出文件、推测每个文件用途，并告诉我完成“月度经营复盘”前还需要确认什么。不要修改任何文件。
+</code></pre>
+<ol start="4">
+<li>展示 Codex 的文件读取、回应和工具调用。</li>
+<li>指出 Plan、Terminal 与 Diff 所在区域；界面版本不同时，用功能概念代替固定位置。</li>
+<li>展示如何中止、补充约束和要求重新验证。</li>
+</ol>
+<h3>快问快答</h3>
+<ul>
+<li>“如果 Codex 准备写错目录，第一步是什么？”——立即中止，并明确允许写入的输出目录。</li>
+<li>“生成成功是否代表结论正确？”——不代表，必须看来源、口径和验证。</li>
+</ul>
+<h3>Fallback</h3>
+<ul>
+<li>Codex 无法读取目录：确认 Workspace 是否选择正确；仍失败则展示预录片段。</li>
+<li>UI 与教材不同：强调入口名称可能变化，讲解任务生命周期，不花时间寻找完全一致的按钮。</li>
+<li>Task 长时间运行：中止后缩小范围，只列前 3 个文件。</li>
+</ul>
+<hr>
+<h2>00:15–00:25｜第一次跟做：从一句需求到本地成果</h2>
+<h3>讲师目标</h3>
+<ul>
+<li>让学员完成第一个可见成果。</li>
+<li>教会 GOALS Prompt 结构与自检。</li>
+</ul>
+<h3>讲师话术</h3>
+<blockquote>
+<p>不需要背 Prompt 公式。只要避免“帮我看一下”这种开放指令。最少讲清五件事：目标、输入、动作、限制、验收。</p>
+</blockquote>
+<h3>演示动作</h3>
+<ol>
+<li>打开 <code>01-operating-metrics.csv</code>。</li>
+<li>从 Prompt Pack 复制“第一次跟做：经营指标摘要”。</li>
+<li>强调三条护栏：只读源文件、缺失信息不猜、结果写入新文件。</li>
+<li>运行后打开生成的 Markdown，现场追问：</li>
+</ol>
+<pre><code class="language-text">请逐条复核刚才的数字，并为每个结论补充来源字段。若发现错误，直接修正并列出修正记录。
+</code></pre>
+<h3>学员动作</h3>
+<ul>
+<li>复制同一 Prompt。</li>
+<li>检查生成文件是否出现。</li>
+<li>对其中一个数字回到 CSV 验证。</li>
+</ul>
+<h3>讲师巡场提示</h3>
+<ul>
+<li>给学员 4 分钟执行，2 分钟验收。</li>
+<li>请完成者帮助邻座检查 Workspace 和文件位置，不代替对方直接操作。</li>
+<li>6 分钟时无论完成率如何都收回注意力，展示预期成果。</li>
+</ul>
+<h3>Fallback</h3>
+<ul>
+<li>学员路径不同：Prompt 使用“当前 Workspace 中的文件名”，不要复制讲师绝对路径。</li>
+<li>CSV 编码异常：使用网站中的预期成果继续讲解，课后提供 UTF-8 版本。</li>
+<li>大量请求排队：学员先阅读 Prompt 并标出 GOALS 五部分，讲师用预生成结果讲验收。</li>
+</ul>
+<hr>
+<h2>00:25–00:37｜多文件月度经营复盘</h2>
+<h3>讲师目标</h3>
+<ul>
+<li>展示 Codex 的多文件读取、数据质量检查、交叉验证和多格式交付。</li>
+</ul>
+<h3>讲师话术</h3>
+<blockquote>
+<p>真正省时间的不是把一段话写漂亮，而是让 Codex 在多份材料之间建立证据链。我们先要求它检查数据质量，再分析；先列不确定项，再写结论。</p>
+</blockquote>
+<h3>输入文件</h3>
+<ul>
+<li><code>01-operating-metrics.csv</code></li>
+<li><code>02-budget-variance.csv</code></li>
+<li><code>03-contract-risk.md</code></li>
+<li><code>04-tax-items.md</code></li>
+<li><code>05-admin-procurement.md</code></li>
+<li><code>06-management-report-template.md</code></li>
+</ul>
+<h3>演示动作</h3>
+<ol>
+<li>复制 Prompt Pack 中“月度经营复盘｜主 Agent 完整版”。</li>
+<li>执行前要求 Codex 先输出：文件清单、口径风险、实施计划、预期产物。</li>
+<li>检查 Plan 后继续。</li>
+<li>执行期间指出并解释工具调用与文件生成。</li>
+<li>打开输出：管理层摘要、数据质量清单、指标明细。</li>
+<li>让 Codex 回答：</li>
+</ol>
+<pre><code class="language-text">哪个结论最不可靠？说明原因、证据缺口和需要谁确认。
+</code></pre>
+<h3>讲师强调</h3>
+<ul>
+<li>“会找风险”比“看起来很确定”更重要。</li>
+<li>结论必须带来源；建议必须写 Owner 和期限建议。</li>
+<li>原始文件保持不变，输出进入单独目录。</li>
+</ul>
+<h3>Fallback</h3>
+<ul>
+<li>分析超时：只处理前两个 CSV，并使用预生成的跨部门风险结果讲解。</li>
+<li>文件解析失败：让 Codex 明确列出失败文件；不要假装已读取。</li>
+<li>数字不一致：这是教学机会，现场要求输出勾稽差异，不临时手算所有记录。</li>
+</ul>
+<hr>
+<h2>00:37–00:49｜Subagents：五类团队并行审阅</h2>
+<h3>讲师目标</h3>
+<ul>
+<li>展示任务拆分与并行协作。</li>
+<li>解释哪些任务适合 Subagent，哪些不适合。</li>
+</ul>
+<h3>讲师话术</h3>
+<blockquote>
+<p>Subagent 不是多开几个聊天框。它的价值是把相互独立的工作交给不同角色，同时规定相同的证据和输出格式，最后由主 Agent 汇总、去重和复核。</p>
+</blockquote>
+<h3>演示动作</h3>
+<ol>
+<li>复制 Prompt Pack 中“Subagents｜五视角并行复盘”。</li>
+<li>展示五个角色和各自输入范围。</li>
+<li>要求所有 Subagent 只读，使用统一字段：发现、证据、影响、风险等级、建议、待确认。</li>
+<li>启动并行任务。</li>
+<li>在运行期间解释：<ul>
+<li>可并行：各专业视角审阅。</li>
+<li>不可直接并行：最终总额勾稽与统一结论。</li>
+</ul>
+</li>
+<li>展示主 Agent 的冲突消解与汇总表。</li>
+</ol>
+<h3>现场互动</h3>
+<ul>
+<li>请五个部门各举手说出一个自己希望 Subagent 检查的规则。</li>
+<li>不扩展执行，只用来说明“角色指令必须具体”。</li>
+</ul>
+<h3>Fallback</h3>
+<ul>
+<li>环境不支持 Subagents：让主 Agent“模拟五个顺序角色”，并明确这不是并行执行。</li>
+<li>某个 Subagent 失败：主 Agent记录失败，继续回收其他结果，再单独重试失败角色。</li>
+<li>输出互相矛盾：展示冲突表，不让主 Agent 随意二选一；标记待业务确认。</li>
+</ul>
+<hr>
+<h2>00:49–00:59｜Skills 与 Superpowers</h2>
+<h3>讲师目标</h3>
+<ul>
+<li>区分 Skill、Plugin、MCP 和第三方 Superpowers。</li>
+<li>演示不知道用什么 Skill 时的发现与安全评估流程。</li>
+</ul>
+<h3>讲师话术</h3>
+<blockquote>
+<p>Skill 是一套可复用工作方法；Plugin 是一组能力的打包；MCP 让 Codex 连接外部工具。Superpowers 是 GitHub 上的第三方 Skills / Plugin 项目，它提供 brainstorming、planning 和系统化执行等 workflow，不是 Codex 内置功能。</p>
+</blockquote>
+<h3>演示动作 A：内部 Skill 市场</h3>
+<ol>
+<li>打开 <code>https://skills.ijovo.com/</code>。</li>
+<li>搜索“数据分析”或“工作总结”。</li>
+<li>展示类别、说明和安装入口。</li>
+<li>复制 Skill 调用示例到 Codex，但不对真实文件执行。</li>
+</ol>
+<h3>演示动作 B：找不到 Skill 时</h3>
+<ol>
+<li>打开 Finance Learning Hub，指出 GitHub / 科学上网课程位置。</li>
+<li>展示在 GitHub 使用“Codex + 任务 + skill”搜索。</li>
+<li>将候选仓库链接交给 Codex，使用“第三方 Skill 安全评估”Prompt。</li>
+<li>只展示评估，不在课堂临时安装未知仓库。</li>
+</ol>
+<h3>演示动作 C：Superpowers</h3>
+<ol>
+<li>调用已安装的 brainstorming / planning 能力。</li>
+<li>输入“把月度经营复盘做成管理层交互网页”的需求。</li>
+<li>展示需求澄清、方案拆解与实施计划。</li>
+</ol>
+<h3>Fallback</h3>
+<ul>
+<li>GitHub 无法访问：展示预先截图；告诉学员课后从 Learning Hub 网络课程进入。</li>
+<li>内部 Skill 市场不可用：展示课程内截图和本地说明。</li>
+<li>Superpowers 版本或调用方式变化：使用项目当前 README 录屏，不现场修改环境。</li>
+</ul>
+<hr>
+<h2>00:59–01:09｜创建 Skill：把重复工作留下来</h2>
+<h3>讲师目标</h3>
+<ul>
+<li>让学员看到从一次 Prompt 到团队 Skill 的转换。</li>
+<li>说明 Skill creation 的适用条件和维护责任。</li>
+</ul>
+<h3>讲师话术</h3>
+<blockquote>
+<p>一次成功 Prompt 不等于一个可维护 Skill。Skill 必须讲清什么时候触发、需要什么输入、按什么顺序执行、哪里必须停下来确认，以及怎样算通过。</p>
+</blockquote>
+<h3>演示动作</h3>
+<ol>
+<li>复制 Prompt Pack 中“创建 Skill｜月度经营复盘助手”。</li>
+<li>要求 Codex 先访谈三个问题：使用对象、稳定输入、必须人工确认的判断。</li>
+<li>生成 Skill 目录和 <code>SKILL.md</code>。</li>
+<li>打开 <code>SKILL.md</code>，指出：触发条件、输入、步骤、限制、输出、验证。</li>
+<li>用一个小输入进行 dry run。</li>
+<li>让 Codex 输出“当前 Skill 不适用的情形”。</li>
+</ol>
+<h3>学员动作</h3>
+<ul>
+<li>选择自己的一个高频任务，在课程卡片上填写：触发条件、输入、输出、一个人工确认点。</li>
+<li>不要求 50 人全部现场完成 Skill 安装。</li>
+</ul>
+<h3>Fallback</h3>
+<ul>
+<li>Skill creator 不可用：用 Prompt 生成 <code>SKILL.md</code> 草稿，解释课后如何安装测试。</li>
+<li>生成内容过长：只展示核心六段，不现场完善脚本。</li>
+<li>学员想封装高风险流程：改成“只读检查 + 草稿输出”，保留人工审批。</li>
+</ul>
+<hr>
+<h2>01:09–01:18｜Sites：生成中文交互网页</h2>
+<h3>讲师目标</h3>
+<ul>
+<li>展示从分析结果到可视化交付物的能力。</li>
+<li>教会学员把业务内容、视觉要求和技术验收写在同一任务中。</li>
+</ul>
+<h3>讲师话术</h3>
+<blockquote>
+<p>生成网页不是输入“做得高级一点”。我们要把受众、信息层级、交互、品牌、数据来源和验收标准写清楚。漂亮只是第一层，数字正确、移动端可读、链接可用才叫交付。</p>
+</blockquote>
+<h3>演示动作</h3>
+<ol>
+<li>复制 Prompt Pack 中“Sites｜生成管理层交互网页”。</li>
+<li>指定所有页面语言为中文，产品名可保留英文。</li>
+<li>指定基于复盘结果生成 KPI、趋势、风险和行动项。</li>
+<li>要求本地启动预览并自动打开页面。</li>
+<li>滚动展示 GSAP 动效，切换移动视口，测试 reduced motion。</li>
+<li>展示自动检查结果，不执行公开发布。</li>
+</ol>
+<h3>Fallback</h3>
+<ul>
+<li>现场生成超时：打开预生成版本，并展示 Codex 已完成的计划与代码 Diff。</li>
+<li>本地端口冲突：让 Codex 检测空闲端口并重启预览。</li>
+<li>图表无数据：使用模拟 JSON / CSV，不允许为了视觉效果编造数字。</li>
+</ul>
+<hr>
+<h2>01:18–01:26｜飞书 CLI：把成果送入协作空间</h2>
+<h3>讲师目标</h3>
+<ul>
+<li>展示 Codex 与飞书的连接价值。</li>
+<li>强化“写操作前确认”的安全习惯。</li>
+</ul>
+<h3>讲师话术</h3>
+<blockquote>
+<p>这一段只对已经在课前打通飞书 CLI 的环境演示。没有配置好的学员今天先看闭环，会后按教程操作。所有写入只进入测试文档和测试 Base。</p>
+</blockquote>
+<h3>演示动作 A：创建云文档</h3>
+<ol>
+<li>复制“飞书｜创建月度经营复盘文档”Prompt。</li>
+<li>Codex 先列出目标对象、写入内容、覆盖与通知影响。</li>
+<li>讲师明确回复“确认写入测试空间”。</li>
+<li>创建后打开链接，检查标题、摘要、风险和行动项。</li>
+</ol>
+<h3>演示动作 B：读取与总结</h3>
+<ol>
+<li>让 Codex 读取刚创建的测试文档。</li>
+<li>输出 200 字管理层摘要和待确认事项。</li>
+<li>比较是否与原文一致。</li>
+</ol>
+<h3>演示动作 C：操作测试 Base</h3>
+<ol>
+<li>读取 <code>07-feishu-base.json</code>。</li>
+<li>先预览将新增的字段和记录。</li>
+<li>确认后写入测试 Base。</li>
+<li>检查记录数、风险等级和 Owner 字段。</li>
+</ol>
+<h3>Fallback</h3>
+<ul>
+<li>飞书授权失效：展示预录闭环和预期结果，不在课堂处理 OAuth / 权限审批。</li>
+<li>测试对象不可写：只执行读取与生成待写入 JSON，不尝试扩大权限。</li>
+<li>写入部分失败：停止重试，先读取目标确认是否产生重复记录。</li>
+</ul>
+<hr>
+<h2>01:26–01:30｜收口：从“会试”到“会用”</h2>
+<h3>讲师话术</h3>
+<blockquote>
+<p>今天真正要带走的不是某一条神 Prompt，而是一套工作方式：限定 Workspace，说明 GOALS，复杂任务先 Plan，需要复用就用 Skill，需要并行就用 Subagent，连接外部系统时先确认写入影响，最后用证据和 checklist 验收。</p>
+</blockquote>
+<h3>现场自检</h3>
+<p>请学员完成四项举手反馈：</p>
+<ol>
+<li>我成功运行了一个 Prompt。</li>
+<li>我生成了一个本地或飞书成果。</li>
+<li>我检查了至少一个来源或数字。</li>
+<li>我知道去哪里继续学习和找 Skill。</li>
+</ol>
+<h3>课后入口</h3>
+<ul>
+<li>培训网站：完整课程、Prompt Pack、实验材料和自学路径。</li>
+<li>内部 Skill 市场：<code>https://skills.ijovo.com/</code>。</li>
+<li>Finance Learning Hub：GitHub 与网络基础课程。</li>
+<li>飞书连接：按指定飞书社区教程完成课后配置。</li>
+</ul>
+<h2>现场问题处理矩阵</h2>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th align="right">当场处理上限</th>
+<th>讲师动作</th>
+<th>课后动作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Codex 未安装</td>
+<td align="right">30 秒</td>
+<td>与邻座结对观看</td>
+<td>按网站安装页完成</td>
+</tr>
+<tr>
+<td>飞书未授权</td>
+<td align="right">20 秒</td>
+<td>跳过写入，展示录屏</td>
+<td>按教程配置与测试</td>
+</tr>
+<tr>
+<td>GitHub 不可访问</td>
+<td align="right">10 秒</td>
+<td>使用截图和本地材料</td>
+<td>学习网络课程后再试</td>
+</tr>
+<tr>
+<td>Prompt 执行超时</td>
+<td align="right">60 秒</td>
+<td>缩小输入或展示预生成结果</td>
+<td>查看日志并重跑</td>
+</tr>
+<tr>
+<td>文件路径错误</td>
+<td align="right">60 秒</td>
+<td>重选 Workspace，避免绝对路径</td>
+<td>依据 checklist 排查</td>
+</tr>
+<tr>
+<td>数字结果不一致</td>
+<td align="right">不隐藏</td>
+<td>输出差异与来源，标记待确认</td>
+<td>按口径逐项复核</td>
+</tr>
+<tr>
+<td>第三方 Skill 报错</td>
+<td align="right">30 秒</td>
+<td>停止安装或执行</td>
+<td>检查版本、依赖与 issue</td>
+</tr>
+<tr>
+<td>外部写入对象错误</td>
+<td align="right">立即停止</td>
+<td>不扩大权限，不重复写入</td>
+<td>先读取现状，评估影响</td>
+</tr>
+</tbody></table>
+<h2>Demo 统一纪律</h2>
+<ul>
+<li>所有输入和输出都使用模拟材料。</li>
+<li>不展示真实路径、账号详情、Token、API key 或私人消息。</li>
+<li>不在现场执行删除、付款、审批、合同签署、权限变更和对外群发。</li>
+<li>写入飞书、推送 Git、发布网站前先让 Codex 说明影响范围。</li>
+<li>任何工具结果与预期不一致时，直接说“不确定”，展示日志和 fallback，不编造成功。</li>
+<li>讲师不承诺 AI 结果天然正确；以证据、勾稽和验收标准收口。</li>
+</ul>
+<h2>讲师复盘模板</h2>
+<p>培训结束后 30 分钟内记录：</p>
+<ul>
+<li>到场人数与完成首个 Prompt 的人数。</li>
+<li>本地成果与飞书成果完成数。</li>
+<li>发生频率最高的三个卡点。</li>
+<li>哪个 Demo 最能激发兴趣，哪个 Demo 时间收益最低。</li>
+<li>需要更新的界面截图、命令、Skill 调用方式和 FAQ。</li>
+<li>下一场需要缩短、增加或改为课前完成的内容。</li>
+</ul>
+
+</main>
+</body>
+</html>

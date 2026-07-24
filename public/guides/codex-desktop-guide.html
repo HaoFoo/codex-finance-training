@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<meta name="theme-color" content="#050706" />
+<link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+<title>Codex Desktop 功能与设置详解｜Codex 财运智能工作流</title>
+<style>
+  :root {
+    color-scheme: dark;
+    --ink: #fbfff9;
+    --muted: #bdc8c0;
+    --line: rgba(255, 255, 255, 0.13);
+    --green: #0ae448;
+    --stage: #050706;
+    --panel: rgba(255, 255, 255, 0.055);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--stage);
+    color: var(--ink);
+    font-family: "SF Pro Display", "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.85;
+    font-size: 16px;
+  }
+  .guide-top {
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px clamp(20px, 4vw, 44px);
+    background: rgba(5, 7, 6, 0.9);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+  }
+  .guide-top a {
+    color: var(--muted);
+    text-decoration: none;
+    padding: 6px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .guide-top a:hover { color: var(--green); border-color: rgba(10, 228, 72, 0.5); }
+  main {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: clamp(36px, 6vw, 72px) clamp(20px, 4vw, 44px) 120px;
+  }
+  h1 { font-size: clamp(30px, 4.6vw, 44px); letter-spacing: -0.03em; line-height: 1.25; margin: 0 0 28px; }
+  h2 { font-size: clamp(23px, 3vw, 30px); letter-spacing: -0.02em; margin: 62px 0 18px; padding-top: 26px; border-top: 1px solid var(--line); }
+  h3 { font-size: 20px; margin: 40px 0 12px; }
+  h4 { font-size: 17px; margin: 30px 0 10px; color: var(--green); }
+  p, li { color: #dbe3dd; }
+  strong { color: var(--ink); }
+  a { color: var(--green); }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 48px 0; }
+  blockquote {
+    margin: 22px 0;
+    padding: 14px 22px;
+    border-left: 3px solid var(--green);
+    background: var(--panel);
+    border-radius: 0 14px 14px 0;
+    color: var(--muted);
+  }
+  blockquote p { margin: 0; }
+  code {
+    font-family: "SFMono-Regular", "Cascadia Code", "PingFang SC", monospace;
+    font-size: 0.88em;
+    background: rgba(255, 255, 255, 0.09);
+    border-radius: 6px;
+    padding: 2px 7px;
+  }
+  pre {
+    background: #0b0e0c;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 22px 24px;
+    overflow-x: auto;
+    line-height: 1.75;
+  }
+  pre code { background: none; padding: 0; font-size: 13px; color: #d9dfdb; }
+  table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+    margin: 26px 0;
+    font-size: 15px;
+  }
+  th, td { border: 1px solid var(--line); padding: 10px 14px; text-align: left; vertical-align: top; }
+  th { background: var(--panel); color: var(--ink); white-space: nowrap; }
+  input[type="checkbox"] { accent-color: var(--green); margin-right: 8px; }
+  li { margin: 6px 0; }
+  img { max-width: 100%; }
+</style>
+</head>
+<body>
+<div class="guide-top">
+  <a href="../">← 返回课程网站</a>
+  <a href="./codex-desktop-guide.md" download>下载 Markdown 版</a>
+</div>
+<main>
+<h1>Codex Desktop 功能与设置详解</h1>
+<h2>阅读说明</h2>
+<p>本指南面向财运中心的法务、行政、财务、税务与经营分析团队，按公司封装版 Codex Desktop 的设置截图逐项解释。默认读者不具备编程经验。</p>
+<blockquote>
+<p>版本提示：本文依据 2026 年 7 月 24 日提供的客户端截图与当日 Codex 官方文档整理。公司封装版、账号套餐、组织策略与客户端版本可能改变入口名称、可选项或默认值。实际操作以当前客户端界面、公司管理员要求和任务中的权限提示为准。截图中存在、但官方文档没有解释的入口，本文只说明如何判断与使用，不推测未验证行为。</p>
+</blockquote>
+<p>设置入口：在 macOS 按 <code>Cmd + ,</code>，或从应用菜单打开“设置”。Windows 对应快捷键通常为 <code>Ctrl + ,</code>。</p>
+<h2>一页推荐设置</h2>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>纯小白日常使用</th>
+<th>50 人现场培训</th>
+<th>高风险或敏感任务</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Workspace</td>
+<td>只选择本次工作目录</td>
+<td>只选择课程模拟目录</td>
+<td>使用隔离目录，优先只读</td>
+</tr>
+<tr>
+<td>默认权限</td>
+<td>保持 Workspace 边界，越界时本人确认</td>
+<td>允许读取和编辑课程目录</td>
+<td>采用最小权限，必要时逐次批准</td>
+</tr>
+<tr>
+<td>自动审核</td>
+<td>先关闭或采用人工审核</td>
+<td>关闭，避免现场出现不可解释的自动放行</td>
+<td>关闭，由本人或组织指定审核者确认</td>
+</tr>
+<tr>
+<td>完全访问权限</td>
+<td>关闭</td>
+<td>关闭</td>
+<td>关闭；除非处于已隔离环境且有明确授权</td>
+</tr>
+<tr>
+<td>语言</td>
+<td>中文</td>
+<td>中文</td>
+<td>中文或团队统一语言</td>
+</tr>
+<tr>
+<td>发送快捷键</td>
+<td><code>Cmd + Enter</code> 发送多行 Prompt</td>
+<td><code>Cmd + Enter</code>，减少误发送</td>
+<td><code>Cmd + Enter</code></td>
+</tr>
+<tr>
+<td>跟进行为</td>
+<td>排队</td>
+<td>排队，方便讲师解释任务顺序</td>
+<td>排队；需要中止时直接停止当前任务</td>
+</tr>
+<tr>
+<td>底部面板</td>
+<td>打开，便于看 Terminal</td>
+<td>打开，投影时保持可见</td>
+<td>打开，保留执行证据</td>
+</tr>
+<tr>
+<td>防止系统休眠</td>
+<td>仅在本人在场的长任务中打开</td>
+<td>打开，避免 Demo 中断</td>
+<td>谨慎；不以此替代人工值守</td>
+</tr>
+<tr>
+<td>Plugins / Browser / Computer Use</td>
+<td>用到再开</td>
+<td>只启用预先验证的演示能力</td>
+<td>默认关闭，按任务最小开启</td>
+</tr>
+<tr>
+<td>外部写入</td>
+<td>先预览，再确认</td>
+<td>只写测试对象</td>
+<td>明确对象、范围、影响与回退后再确认</td>
+</tr>
+</tbody></table>
+<p>上表是课程推荐，不代表截图中开关的当前状态。组织管理策略可能锁定部分设置，学员不要为了追求“更顺畅”而绕过管理限制。</p>
+<hr>
+<h2>01｜常规</h2>
+<h3>1.1 默认权限</h3>
+<ul>
+<li><strong>是什么</strong>：允许 Codex 在当前 Workspace 边界内读取和编辑文件；任务需要访问边界以外资源时，再请求额外权限。官方文档将 Workspace 写入视为常见的低摩擦本地模式。</li>
+<li><strong>什么时候用</strong>：本地文档整理、模拟数据分析、网站或脚本开发等需要在指定目录内产生文件的任务。</li>
+<li><strong>推荐设置</strong>：小白保持 Workspace 边界并人工处理额外权限；现场培训只授权课程目录；高风险任务优先只读或使用最小权限 profile。</li>
+<li><strong>操作路径</strong>：<code>设置 → 常规 → 权限 → 默认权限</code>。新建任务时仍要再次确认 Workspace 是否正确。</li>
+<li><strong>风险与误区</strong>：打开默认权限不等于可以放心选择整个个人目录。Workspace 过大，会让不相关文件进入可见或可写范围。</li>
+</ul>
+<h3>1.2 自动审核</h3>
+<ul>
+<li><strong>是什么</strong>：把符合条件的额外权限请求交给 reviewer agent 审核。官方文档明确说明：自动审核只改变“谁来审核请求”，不会扩大 sandbox 的文件和网络边界，也可能作出错误判断。</li>
+<li><strong>什么时候用</strong>：经过验证的低风险开发流程，需要减少频繁人工确认，同时组织允许自动审核时。</li>
+<li><strong>推荐设置</strong>：小白和现场培训关闭；高风险任务保持人工审核；成熟开发环境可在明确 policy 与 sandbox 的前提下评估开启。</li>
+<li><strong>操作路径</strong>：<code>设置 → 常规 → 权限 → 自动审核</code>。如受组织策略管理，遵循管理员配置。</li>
+<li><strong>风险与误区</strong>：不要把“自动审核”理解为“自动保证安全”。它不替你检查业务数据、目标对象或最终结论。</li>
+</ul>
+<h3>1.3 完全访问权限</h3>
+<ul>
+<li><strong>是什么</strong>：Codex 无需逐次批准即可在更广的文件和网络范围执行命令。官方文档把完全访问对应为移除 sandbox 边界并不再停下来请求批准的高风险组合。</li>
+<li><strong>什么时候用</strong>：只适用于用户明确授权、设备或容器已有外部隔离、任务确实需要跨目录或网络执行的特殊技术场景。</li>
+<li><strong>推荐设置</strong>：小白关闭；现场培训关闭；高风险任务关闭。即使是开发者，也应优先增加一个明确 writable root，而不是直接开放整个系统。</li>
+<li><strong>操作路径</strong>：<code>设置 → 常规 → 权限 → 完全访问权限</code>，或任务输入框下方的权限菜单；不同版本名称可能为 Full access。</li>
+<li><strong>风险与误区</strong>：它显著增加误删、覆盖、数据外传和执行恶意脚本的风险。“少点确认”不是开启完全访问的充分理由。</li>
+</ul>
+<h3>1.4 默认文件打开目标</h3>
+<ul>
+<li><strong>是什么</strong>：决定点击成果文件、Diff 中的文件名或文件夹时，由系统默认应用还是指定编辑器打开。</li>
+<li><strong>什么时候用</strong>：经常审阅 Markdown、CSV、代码或网页文件，希望点击后直接进入熟悉工具时。</li>
+<li><strong>推荐设置</strong>：小白使用 <code>Default app</code>；现场培训保持讲师已测试的默认应用；开发者可选择 VS Code 等编辑器。高风险任务不受此设置改变权限。</li>
+<li><strong>操作路径</strong>：<code>设置 → 常规 → 常规 → 默认文件打开目标</code>。</li>
+<li><strong>风险与误区</strong>：它只改变打开方式，不改变文件内容和 Codex 权限。某应用打不开文件时，不要误判为 Codex 生成失败。</li>
+</ul>
+<h3>1.5 语言</h3>
+<ul>
+<li><strong>是什么</strong>：设置应用 UI 的显示语言。</li>
+<li><strong>什么时候用</strong>：希望菜单、设置和系统提示与培训材料保持一致时。</li>
+<li><strong>推荐设置</strong>：本课程统一选择中文；团队排障时记录中英文原始错误文字，避免翻译造成关键词丢失。</li>
+<li><strong>操作路径</strong>：<code>设置 → 常规 → 常规 → 语言</code>。</li>
+<li><strong>风险与误区</strong>：切换 UI 语言不会自动改变项目里的输出语言。网页、报告和文件命名仍要在 Prompt 或 <code>AGENTS.md</code> 中明确要求中文。</li>
+</ul>
+<h3>1.6 在菜单栏中显示</h3>
+<ul>
+<li><strong>是什么</strong>：关闭主窗口后，仍在 macOS 菜单栏保留 Codex / ChatGPT 入口，便于快速返回。</li>
+<li><strong>什么时候用</strong>：频繁切换文档、浏览器和 Codex，或任务在后台运行时。</li>
+<li><strong>推荐设置</strong>：小白可打开；现场培训打开，减少找窗口时间；共享或投影设备按隐私要求决定。</li>
+<li><strong>操作路径</strong>：<code>设置 → 常规 → 常规 → 在菜单栏中显示</code>。</li>
+<li><strong>风险与误区</strong>：关闭主窗口不一定代表任务已停止或应用已退出。离开设备前应检查任务状态和敏感窗口。</li>
+</ul>
+<h3>1.7 底部面板</h3>
+<ul>
+<li><strong>是什么</strong>：在应用中显示底部面板控制。集成 Terminal 通常位于该区域，用于查看命令、日志和运行中的本地服务。</li>
+<li><strong>什么时候用</strong>：需要观察 build、test、Git、脚本或本地 server 输出时。</li>
+<li><strong>推荐设置</strong>：小白和现场培训打开；高风险任务打开并保留执行证据。可用 <code>Cmd + J</code> 切换面板，`Ctrl + `` 切换 Terminal。</li>
+<li><strong>操作路径</strong>：<code>设置 → 常规 → 常规 → 底部面板</code>。</li>
+<li><strong>风险与误区</strong>：Terminal 没有红字不代表业务结果正确；相反，出现错误也不应直接连续重跑，应先看错误原文和部分输出。</li>
+</ul>
+<h3>1.8 默认终端位置</h3>
+<ul>
+<li><strong>是什么</strong>：决定 Terminal 标签默认显示在底部还是右侧。</li>
+<li><strong>什么时候用</strong>：根据屏幕比例同时查看聊天、文件 Diff 与命令输出。</li>
+<li><strong>推荐设置</strong>：宽屏可选右侧；较窄屏幕或代码输出较长时选底部；投影前讲师应固定布局并放大字号。</li>
+<li><strong>操作路径</strong>：<code>设置 → 常规 → 常规 → 默认终端位置</code>。</li>
+<li><strong>风险与误区</strong>：这只是布局设置。找不到 Terminal 时先用快捷键切换，不要重复启动任务。</li>
+</ul>
+<h3>1.9 运行时防止系统休眠</h3>
+<ul>
+<li><strong>是什么</strong>：Codex 运行任务期间保持电脑唤醒，减少长任务因系统休眠中断。</li>
+<li><strong>什么时候用</strong>：本地 build、多文件处理、Subagents 或长时间验证，且本人仍在现场监督时。</li>
+<li><strong>推荐设置</strong>：小白按需打开；现场培训打开；高风险任务只在有人值守时打开，任务结束后恢复日常系统策略。</li>
+<li><strong>操作路径</strong>：<code>设置 → 常规 → 常规 → 运行时防止系统休眠</code>。</li>
+<li><strong>风险与误区</strong>：防止休眠不等于任务可以无人监管，也不会解决网络断开、权限失败或应用被关闭。</li>
+</ul>
+<h3>1.10 速度</h3>
+<ul>
+<li><strong>是什么</strong>：选择任务、Subagents 和上下文压缩等处理的速度档位。官方文档中的 Fast mode 可能提高响应速度并消耗更多额度；公司 API 中转的计量方式可能不同。</li>
+<li><strong>什么时候用</strong>：低风险扫描、课堂 Demo 或时间敏感的简单任务，可优先速度；复杂审阅和高风险判断优先质量与验证。</li>
+<li><strong>推荐设置</strong>：小白使用默认；现场培训可在额度与稳定性确认后使用“快速”；高风险任务不要用速度替代推理深度和人工复核。</li>
+<li><strong>操作路径</strong>：<code>设置 → 常规 → 常规 → 速度</code>。实际档位和可用性取决于账号与公司封装版本。</li>
+<li><strong>风险与误区</strong>：速度更快不代表结论更准确。大任务超时应先缩小输入和拆分步骤，而不是只提高速度。</li>
+</ul>
+<h3>1.11 从其他 AI 应用导入工作内容</h3>
+<ul>
+<li><strong>是什么</strong>：将受支持的设置、项目文件或最近聊天记录迁移到当前应用。可导入范围以界面预览为准。</li>
+<li><strong>什么时候用</strong>：明确需要从旧工具迁移个人配置，并已检查将导入哪些内容时。</li>
+<li><strong>推荐设置</strong>：小白无迁移需要时不使用；现场培训不导入；高风险环境先在空白测试项目验证，并排除真实对话和凭据。</li>
+<li><strong>操作路径</strong>：<code>设置 → 常规 → 常规 → 从其他 AI 应用导入工作内容 → 导入</code>。</li>
+<li><strong>风险与误区</strong>：导入可能带入过期规则、个人路径、真实项目或历史敏感对话。不要在投影环境现场执行导入。</li>
+</ul>
+<h3>1.12 打开源许可证</h3>
+<ul>
+<li><strong>是什么</strong>：查看应用捆绑的第三方开源依赖及许可声明。</li>
+<li><strong>什么时候用</strong>：合规审查、软件资产登记或需要确认第三方许可时。</li>
+<li><strong>推荐设置</strong>：这是只读信息入口，三类场景均无需日常调整；法务或 IT 可按需导出核对。</li>
+<li><strong>操作路径</strong>：<code>设置 → 常规 → 常规 → 打开源许可证 → 查看</code>。</li>
+<li><strong>风险与误区</strong>：许可证清单不等于对已安装第三方 Skill、Plugin 的安全审查；外部能力仍要单独检查来源、代码和权限。</li>
+</ul>
+<h3>1.13 显示上下文窗口使用情况</h3>
+<ul>
+<li><strong>是什么</strong>：在编辑或对话区域显示当前上下文容量的使用情况，帮助判断长任务是否接近需要压缩或拆分的阶段。</li>
+<li><strong>什么时候用</strong>：处理大量文件、长对话、复杂 Subagents 或需要持续多轮修订时。</li>
+<li><strong>推荐设置</strong>：小白可打开学习；现场培训打开便于讲解；高风险任务打开并在接近上限前让 Codex 输出阶段摘要和未完成项。</li>
+<li><strong>操作路径</strong>：<code>设置 → 常规 → 编辑器 → 显示上下文窗口使用情况</code>。</li>
+<li><strong>风险与误区</strong>：上下文使用量不是账单金额，也不等于输入文件已全部正确理解。重要规则仍应放在 Prompt、<code>AGENTS.md</code> 或 Skill 中。</li>
+</ul>
+<h3>1.14 发送快捷键</h3>
+<ul>
+<li><strong>是什么</strong>：决定按 Enter 是立即发送，还是插入新行；也可要求 <code>Cmd + Enter</code> 才发送多行 Prompt。</li>
+<li><strong>什么时候用</strong>：经常输入包含步骤、限制和验收标准的多行任务时。</li>
+<li><strong>推荐设置</strong>：小白、现场培训和高风险任务均建议使用 <code>Cmd + Enter</code> 发送，减少中文输入或换行时误触。</li>
+<li><strong>操作路径</strong>：<code>设置 → 常规 → 编辑器 → 发送快捷键</code>。</li>
+<li><strong>风险与误区</strong>：更改快捷键后先在空白 Task 测试。不要在外部写操作 Prompt 只写到一半时误发送。</li>
+</ul>
+<h3>1.15 跟进行为</h3>
+<ul>
+<li><strong>是什么</strong>：决定 Codex 正在运行时发送的新消息，是加入后续队列，还是立即引导当前运行改变方向。官方文档将两种行为概括为 wait for next run 与 steer current run。</li>
+<li><strong>什么时候用</strong>：任务运行中发现新要求，或想安排下一步而不打断当前工作时。</li>
+<li><strong>推荐设置</strong>：小白与现场培训选择“排队”；高风险任务也优先排队。发现任务越界时不要靠跟进消息碰碰运气，应直接中止后重新说明边界。</li>
+<li><strong>操作路径</strong>：<code>设置 → 常规 → 编辑器 → 跟进行为</code>；单条消息可能支持临时执行相反行为，以当前界面提示为准。</li>
+<li><strong>风险与误区</strong>：选择“引导”可能让当前计划中途变化；选择“排队”则不会立即纠正正在发生的错误操作。</li>
+</ul>
+<hr>
+<h2>02｜个人与体验</h2>
+<h3>2.1 个人资料</h3>
+<ul>
+<li><strong>是什么</strong>：查看头像、显示名称、用户名，以及任务时长、Token 活动、连续使用等个人使用洞察；部分个人计划支持分享资料卡或邀请功能。</li>
+<li><strong>什么时候用</strong>：确认当前身份、查看个人学习进度，或保存使用概览时。</li>
+<li><strong>推荐设置</strong>：小白只需确认账号正确；现场培训不要展示个人资料页；高风险环境避免分享包含账号或使用习惯的截图。</li>
+<li><strong>操作路径</strong>：<code>设置 → 个人资料</code>。</li>
+<li><strong>风险与误区</strong>：个人 Token 活动是使用洞察，不等于公司 API 中转的最终计费口径。不要用截图推断团队成本。</li>
+</ul>
+<h3>2.2 外观</h3>
+<ul>
+<li><strong>是什么</strong>：调整主题、强调色、背景色、前景色，以及 UI 或代码字体；具体可选项依版本而定。</li>
+<li><strong>什么时候用</strong>：改善长时间阅读体验、投影可读性或代码 Diff 清晰度时。</li>
+<li><strong>推荐设置</strong>：小白使用系统或默认主题；现场培训选择高对比、较大字体；高风险任务没有特殊安全要求，但避免主题造成警告颜色不清。</li>
+<li><strong>操作路径</strong>：<code>设置 → 外观</code>。</li>
+<li><strong>风险与误区</strong>：自定义颜色不应降低文本、焦点、错误或 Diff 的对比度。视觉偏好不会改变网页成果的主题。</li>
+</ul>
+<h3>2.3 语音</h3>
+<ul>
+<li><strong>是什么</strong>：管理当前版本提供的语音输入、听写或相关设备偏好。官方快捷键文档确认听写入口可使用 <code>Ctrl + Shift + D</code>；具体设置项以当前页面为准。</li>
+<li><strong>什么时候用</strong>：口述草稿、快速记录任务背景，或不便键盘输入时。</li>
+<li><strong>推荐设置</strong>：小白先在无敏感内容的 Task 测试；现场培训默认关闭麦克风相关功能，避免回声与误触；高风险任务不口述真实客户、合同、薪酬或凭据。</li>
+<li><strong>操作路径</strong>：<code>设置 → 语音</code>，或使用当前界面提供的听写按钮。</li>
+<li><strong>风险与误区</strong>：语音识别可能误听专有名词、数字、金额和日期。发送前必须人工检查文本。</li>
+</ul>
+<h3>2.4 配置</h3>
+<ul>
+<li><strong>是什么</strong>：管理 Codex 的持久化设置层，例如模型、推理、sandbox、审批、MCP、Subagents、Hooks 和 feature flags。个人默认通常位于 <code>~/.codex/config.toml</code>，项目配置可位于项目的 <code>.codex/config.toml</code>。</li>
+<li><strong>什么时候用</strong>：需要跨 Task 保留技术设置，或项目要共享一致的环境与工具配置时。</li>
+<li><strong>推荐设置</strong>：小白不直接编辑；现场培训沿用公司封装默认配置；高风险任务由管理员或技术 Owner 审阅后修改，并保留版本记录。</li>
+<li><strong>操作路径</strong>：<code>设置 → 配置</code>，可能提供打开 <code>config.toml</code> 的入口。CLI、IDE 与 Desktop 可能共享配置层。</li>
+<li><strong>风险与误区</strong>：不要把临时任务要求、API key 或真实业务数据写入配置。公司 API 中转相关设置不要自行覆盖。</li>
+</ul>
+<h3>2.5 个性化</h3>
+<ul>
+<li><strong>是什么</strong>：选择 Friendly、Pragmatic 或 None 等默认 personality，并维护自定义指令。官方文档说明自定义指令可能更新个人级 <code>AGENTS.md</code>。</li>
+<li><strong>什么时候用</strong>：希望所有 Task 默认采用某种表达风格、语言或个人工作习惯时。</li>
+<li><strong>推荐设置</strong>：小白选择 Pragmatic；现场培训使用克制、直接的风格；高风险任务把数据、权限和验收规则写入项目级 <code>AGENTS.md</code>，不要只依赖 personality。</li>
+<li><strong>操作路径</strong>：<code>设置 → 个性化</code>。</li>
+<li><strong>风险与误区</strong>：个性化影响表达与偏好，不是权限控制。不要在个人指令中保存密钥或只属于某个项目的敏感规则。</li>
+</ul>
+<h3>2.6 宠物</h3>
+<ul>
+<li><strong>是什么</strong>：可选的动画陪伴功能，可通过设置或 <code>/pet</code> 等入口唤醒或收起；不同版本可用内容可能不同。</li>
+<li><strong>什么时候用</strong>：个人使用时增加趣味或观察任务状态，不影响实际任务能力。</li>
+<li><strong>推荐设置</strong>：小白按个人偏好；现场培训关闭，避免分散注意；高风险或共享设备关闭。</li>
+<li><strong>操作路径</strong>：<code>设置 → 宠物</code>。</li>
+<li><strong>风险与误区</strong>：宠物状态不是任务完成、成功或安全的证据。仍要查看日志、Diff 和成果文件。</li>
+</ul>
+<h3>2.7 键盘快捷键</h3>
+<ul>
+<li><strong>是什么</strong>：查看、搜索、修改或重置 Desktop 命令快捷键；可按命令名搜索，也可切换到按键搜索。</li>
+<li><strong>什么时候用</strong>：需要快速打开设置、项目、Terminal、Review 或切换面板时。</li>
+<li><strong>推荐设置</strong>：现场尽量保留默认，减少设备差异；自定义前检查是否与 macOS、输入法或其他应用冲突。</li>
+<li><strong>操作路径</strong>：<code>设置 → 键盘快捷键</code>，或 <code>Cmd + Shift + /</code>。</li>
+<li><strong>风险与误区</strong>：培训材料使用默认快捷键；如果个人已经改过，应以设置页显示为准。</li>
+</ul>
+<p>常用默认快捷键：</p>
+<table>
+<thead>
+<tr>
+<th>动作</th>
+<th>macOS</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>打开命令菜单</td>
+<td><code>Cmd + Shift + P</code> 或 <code>Cmd + K</code></td>
+</tr>
+<tr>
+<td>打开设置</td>
+<td><code>Cmd + ,</code></td>
+</tr>
+<tr>
+<td>打开文件夹</td>
+<td><code>Cmd + O</code></td>
+</tr>
+<tr>
+<td>切换侧边栏</td>
+<td><code>Cmd + B</code></td>
+</tr>
+<tr>
+<td>切换 Review 面板</td>
+<td><code>Cmd + Option + B</code></td>
+</tr>
+<tr>
+<td>切换底部面板</td>
+<td><code>Cmd + J</code></td>
+</tr>
+<tr>
+<td>切换 Terminal</td>
+<td>`Ctrl + ``</td>
+</tr>
+<tr>
+<td>新建 Task / Chat</td>
+<td><code>Cmd + N</code></td>
+</tr>
+<tr>
+<td>搜索 Task / Chat</td>
+<td><code>Cmd + G</code></td>
+</tr>
+<tr>
+<td>当前 Task 内查找</td>
+<td><code>Cmd + F</code></td>
+</tr>
+<tr>
+<td>听写</td>
+<td><code>Ctrl + Shift + D</code></td>
+</tr>
+</tbody></table>
+<h3>2.8 使用情况和计费</h3>
+<ul>
+<li><strong>是什么</strong>：查看当前账号或工作区可见的使用量、额度、计费或套餐信息。公司封装版可能展示内部 API 中转口径，也可能仅提供部分信息。</li>
+<li><strong>什么时候用</strong>：排查额度不足、了解使用趋势或核对套餐状态时。</li>
+<li><strong>推荐设置</strong>：作为只读查看入口；现场培训不要展示个人或公司费用；高风险环境由账号或财务 Owner 按正式口径核对。</li>
+<li><strong>操作路径</strong>：<code>设置 → 使用情况和计费</code>。</li>
+<li><strong>风险与误区</strong>：不要把某一页 Token 数直接等同于应付费用。模型、速度、套餐与公司中转规则都可能影响最终口径。</li>
+</ul>
+<h3>2.9 账户</h3>
+<ul>
+<li><strong>是什么</strong>：确认当前登录身份、所属 workspace、认证状态，以及退出或跳转账户管理等操作。公司封装版使用飞书认证并自动分配 API key。</li>
+<li><strong>什么时候用</strong>：登录状态异常、权限与同事不同、准备切换 workspace 或退出共享设备时。</li>
+<li><strong>推荐设置</strong>：小白只使用公司指定登录方式；现场培训提前完成认证；高风险任务确认当前账号与目标测试空间一致。</li>
+<li><strong>操作路径</strong>：<code>设置 → 账户</code>，部分管理动作可能在外部页面打开。</li>
+<li><strong>风险与误区</strong>：登录成功不代表已获得所有 Plugin、飞书或 GitHub 权限。不要截图或复制认证 Token、API key、Cookie 与验证码。</li>
+</ul>
+<hr>
+<h2>03｜集成</h2>
+<h3>3.1 智能快照</h3>
+<ul>
+<li><strong>是什么</strong>：截图确认当前客户端存在该入口，但所提供的当前官方 manual 没有给出“智能快照”这一标签的明确定义。它可能属于当前版本或公司封装能力，不能仅凭名称推断采集范围、保存位置或恢复行为。</li>
+<li><strong>什么时候用</strong>：只有在当前设置页明确说明它会捕获什么、保存多久、用于什么任务，并且材料允许被捕获时再使用。</li>
+<li><strong>推荐设置</strong>：小白保持默认；现场培训不启用未经验证的快照能力；高风险任务保持关闭，除非公司安全与数据政策明确批准。</li>
+<li><strong>操作路径</strong>：<code>设置 → 集成 → 智能快照</code>，逐项阅读当前页面说明与权限提示。</li>
+<li><strong>风险与误区</strong>：不要把它与 Worktree 删除前的恢复快照、macOS 截图或数据备份混为一谈。若页面没有说明采集边界，应向内部产品 Owner 确认。</li>
+</ul>
+<h3>3.2 插件</h3>
+<ul>
+<li><strong>是什么</strong>：安装、启用或管理能力包。Plugin 可以包含 Skills、命令、MCP、Hooks、资源或连接器，实际内容由插件 manifest 决定。</li>
+<li><strong>什么时候用</strong>：需要一组经过维护的领域能力，例如飞书、GitHub、浏览器或 Office 工作流时。</li>
+<li><strong>推荐设置</strong>：小白优先内部 Skill 市场与公司已审核 Plugin；现场只启用预装并 dry run 的能力；高风险任务逐项检查权限、脚本、网络与写入范围。</li>
+<li><strong>操作路径</strong>：<code>设置 → 集成 → 插件</code>，或应用中的 Plugin 目录。安装后可能需要新建 Task 或重启，以当前提示为准。</li>
+<li><strong>风险与误区</strong>：Plugin 不是“装上就安全”。第三方项目要检查作者、版本、LICENSE、依赖、Hooks、MCP 与卸载影响。</li>
+</ul>
+<h3>3.3 浏览器</h3>
+<ul>
+<li><strong>是什么</strong>：管理内置 Browser plugin、Chrome extension，以及网站 allowlist / blocklist。内置浏览器使用与个人 Chrome 分离的 profile；Chrome extension 则可能操作已登录页面。</li>
+<li><strong>什么时候用</strong>：搜索内部 Skill、读取公开网页、测试 localhost 网页，或在明确授权下操作已登录的测试系统。</li>
+<li><strong>推荐设置</strong>：小白默认逐站询问；现场仅允许课程网站、内部 Skill 市场和本地预览；高风险任务使用 blocklist，避免“允许所有网站”。</li>
+<li><strong>操作路径</strong>：<code>设置 → 集成 → 浏览器</code>；Chrome 的网站管理在部分版本可能位于 <code>电脑操控 → Google Chrome → 管理</code>。</li>
+<li><strong>风险与误区</strong>：网页内容可能包含恶意指令。Browser history、登录态与页面数据都可能敏感，不要让网页指令覆盖用户目标和安全规则。</li>
+</ul>
+<h3>3.4 电脑操控</h3>
+<ul>
+<li><strong>是什么</strong>：允许 Codex 通过屏幕和辅助功能操作桌面应用。macOS 通常需要 Screen Recording 或 Accessibility 系统权限。</li>
+<li><strong>什么时候用</strong>：目标软件没有 API，且任务是低风险、可观察、可暂停的界面操作时。</li>
+<li><strong>推荐设置</strong>：小白用到再开；现场仅操作课程目录或测试页面；高风险任务默认关闭，并在 macOS“隐私与安全性”中撤销不再需要的系统权限。</li>
+<li><strong>操作路径</strong>：<code>设置 → 集成 → 电脑操控</code>；系统级权限在 <code>macOS 系统设置 → 隐私与安全性</code>。</li>
+<li><strong>风险与误区</strong>：不要让 Codex 自动处理登录、验证码、付款、审批、合同签署、权限变更或生产数据批量修改。出现弹窗应立即暂停。</li>
+</ul>
+<hr>
+<h2>04｜编码</h2>
+<h3>4.1 钩子</h3>
+<ul>
+<li><strong>是什么</strong>：Hooks 在 SessionStart、PreToolUse、PostToolUse、PermissionRequest、Stop 等生命周期节点运行自定义检查或脚本，可用于阻止粘贴密钥、执行验证或发送合规日志。</li>
+<li><strong>什么时候用</strong>：团队已经有明确、可测试的机械规则，希望在 Prompt 之外强制执行时。</li>
+<li><strong>推荐设置</strong>：小白不配置；现场培训只展示概念；高风险环境只使用组织管理或已审查的 Hooks，并保持最小作用范围。</li>
+<li><strong>操作路径</strong>：<code>设置 → 编码 → 钩子</code>。配置可能来自 <code>hooks.json</code> 或 <code>config.toml</code>；项目级 Hooks 只在受信项目层加载。</li>
+<li><strong>风险与误区</strong>：Hook 本身会执行代码。非托管 Hook 必须审查和信任；多个匹配 Hook 可能并行运行，不能假定一个 Hook 会阻止其他 Hook 启动。</li>
+</ul>
+<h3>4.2 连接</h3>
+<ul>
+<li><strong>是什么</strong>：管理 Codex 可连接的远程开发主机或当前版本提供的其他编码连接。当前官方 manual 明确提到可在 Settings &gt; Connections 管理 SSH host；实际类型以客户端为准。</li>
+<li><strong>什么时候用</strong>：代码、数据或运行环境位于远程 Mac / Linux 主机，需要把 Task 放到远程项目或 Worktree 中时。</li>
+<li><strong>推荐设置</strong>：小白和现场培训不配置；高风险任务使用测试主机、最小账号权限、受控 SSH key 和明确网络范围。</li>
+<li><strong>操作路径</strong>：<code>设置 → 编码 → 连接</code>，按页面添加、启用或停用目标主机。</li>
+<li><strong>风险与误区</strong>：连接远程主机会扩大可访问的数据和命令范围。不要上传私钥，不要把个人生产服务器当课堂环境，也不要把“连接成功”视为授权全部目录。</li>
+</ul>
+<h3>4.3 Git</h3>
+<ul>
+<li><strong>是什么</strong>：Codex Desktop 的 Git 工具用于查看 Diff、Stage、Revert、Commit、Push 和创建 Pull Request。Review 面板反映整个仓库状态，不只显示 Codex 修改的内容。</li>
+<li><strong>什么时候用</strong>：网站、脚本、团队 Skill 或配置文件需要版本记录、团队 review 与可回退发布时。</li>
+<li><strong>推荐设置</strong>：小白先学会看 Diff，不急于 Push；现场由讲师演示；高风险仓库在提交前运行测试、扫描凭据并由 Owner 审阅。</li>
+<li><strong>操作路径</strong>：<code>设置 → 编码 → Git</code> 管理当前版本提供的 Git 偏好；项目中通过 Review 面板完成常见操作。<code>/review</code> 仅在 Git 仓库项目中可用。</li>
+<li><strong>风险与误区</strong>：Revert 会丢弃选择的未提交变更，必须看清范围。PR 是审阅入口，不代表内容或数据天然正确。</li>
+</ul>
+<h3>4.4 环境</h3>
+<ul>
+<li><strong>是什么</strong>：Local environment 为项目定义 Worktree 创建时的 setup scripts，以及 Run、Test 等常用 actions；配置保存在项目根目录的 <code>.codex</code> 中，可按需要纳入 Git 共享。</li>
+<li><strong>什么时候用</strong>：新 Worktree 总要安装依赖、执行 build，或团队频繁运行同一组启动与测试命令时。</li>
+<li><strong>推荐设置</strong>：小白不配置；现场使用预先验证的课程环境；高风险项目要求脚本可读、可重复、有限时、有日志，并经过代码审阅。</li>
+<li><strong>操作路径</strong>：<code>设置 → 编码 → 环境</code>，选择项目后配置 setup 与 actions。此能力仅在 Codex Desktop 的 Codex 模式可用时，以实际界面为准。</li>
+<li><strong>风险与误区</strong>：setup script 会自动执行命令。不要在脚本中写密钥、破坏性清理或无限等待；平台差异要提供 macOS / Windows / Linux 分支。</li>
+</ul>
+<h3>4.5 工作树</h3>
+<ul>
+<li><strong>是什么</strong>：Worktree 是同一 Git 仓库的独立 checkout，让多个 Task 或 Subagents 并行修改而不干扰 Local。每个 Worktree 有自己的文件副本，但共享 Git 元数据。</li>
+<li><strong>什么时候用</strong>：希望 Codex 在后台做网页、内容或 QA，同时自己继续使用本地分支；或多个并行任务需要文件隔离时。</li>
+<li><strong>推荐设置</strong>：小白先观看；现场主任务使用 Local，讲师展示并行场景；开发者为独立改动使用 Worktree，并通过 Handoff 带回 Local 验证。</li>
+<li><strong>操作路径</strong>：<code>设置 → 编码 → 工作树</code> 可调整 Worktree root 等设置；新建 Task 时在输入框下选择 Worktree 与起始分支。</li>
+<li><strong>风险与误区</strong>：Worktree 只适用于 Git 仓库。默认可能处于 detached HEAD；同一分支不能同时在两个 Worktree checkout。依赖、缓存和忽略文件会增加磁盘占用或导致运行缺失。</li>
+</ul>
+<p>Worktree 课堂记忆法：</p>
+<pre><code class="language-text">Local = 前台主工作区
+Worktree = 隔离的后台副本
+Handoff = 在 Local 与 Worktree 之间安全移动 Task 和代码
+</code></pre>
+<hr>
+<h2>05｜已归档任务</h2>
+<h3>5.1 已归档任务</h3>
+<ul>
+<li><strong>是什么</strong>：查看已经归档的 Task，包括日期和项目上下文，并按当前版本提供的方式恢复。归档主要用于整理侧边栏，不等于删除所有本地成果。</li>
+<li><strong>什么时候用</strong>：任务已经完成、暂停或不需要长期占据侧边栏，但仍希望保留记录时。</li>
+<li><strong>推荐设置</strong>：完成最终验收、保存成果路径并确认无待办后再归档；需要继续时使用 Unarchive / 取消归档。</li>
+<li><strong>操作路径</strong>：<code>设置 → 已归档 → 已归档任务</code>。</li>
+<li><strong>风险与误区</strong>：关联 Codex-managed Worktree 的 Task 被归档后，旧 Worktree 可能按清理策略删除；官方说明删除前会保存恢复快照。不要把归档当作正式业务备份或 Git Commit。</li>
+</ul>
+<hr>
+<h2>06｜现场培训的推荐操作顺序</h2>
+<p>讲师只演示以下主线，不在 90 分钟内逐页调整所有设置：</p>
+<ol>
+<li>打开 <code>设置 → 常规</code>，确认中文、课程 Workspace、底部面板和 <code>Cmd + Enter</code>。</li>
+<li>说明默认权限、自动审核和完全访问的差异，现场保持完全访问关闭。</li>
+<li>打开 <code>插件</code>，确认课程需要的 Skills / Plugins 已在课前准备。</li>
+<li>打开 <code>浏览器</code> 与 <code>电脑操控</code>，只解释权限边界，不临时授权生产系统。</li>
+<li>打开 <code>Git / 环境 / 工作树</code>，用一分钟说明“审阅、准备、隔离”的关系。</li>
+<li>返回新建 Task，开始只读检查课程模拟材料。</li>
+</ol>
+<p>现场出现设置差异时，使用以下处理原则：</p>
+<ul>
+<li>入口名称不同：按功能概念继续，不花时间寻找完全一致的按钮。</li>
+<li>设置被锁定：遵循组织策略，不尝试绕过。</li>
+<li>功能不存在：标记版本差异，观看讲师演示或预录结果。</li>
+<li>权限不清楚：缩小 Workspace，切回只读或停止任务。</li>
+<li>外部系统未连接：只生成本地待写入文件，会后再配置。</li>
+</ul>
+<h2>07｜设置修改后的验证 Prompt</h2>
+<pre><code class="language-text">请只读检查当前 Codex 任务环境，不要修改文件或调用外部系统。
+
+请告诉我：
+1. 当前 Workspace 是什么范围；
+2. 你是否可以写入 Workspace；
+3. 访问 Workspace 外文件或网络时是否需要额外确认；
+4. 当前可用的 Skills、Plugins、Browser 或 Computer Use 能力；
+5. 当前项目是否为 Git 仓库，是否处于 Local 或 Worktree；
+6. 你计划如何避免读取密钥、个人目录和真实业务数据。
+
+如果某项无法从当前环境确认，请明确写“无法确认”，不要猜测。
+</code></pre>
+<h2>08｜官方参考</h2>
+<ul>
+<li><a href="https://learn.chatgpt.com/docs/reference/settings">ChatGPT Desktop 设置</a></li>
+<li><a href="https://learn.chatgpt.com/docs/reference/commands">Desktop 命令与快捷键</a></li>
+<li><a href="https://learn.chatgpt.com/docs/sandboxing">权限、sandbox 与自动审核</a></li>
+<li><a href="https://learn.chatgpt.com/docs/config-file/config-basic">Codex 配置基础</a></li>
+<li><a href="https://learn.chatgpt.com/docs/hooks">Hooks</a></li>
+<li><a href="https://learn.chatgpt.com/docs/browser?surface=app">内置浏览器</a></li>
+<li><a href="https://learn.chatgpt.com/docs/chrome-extension">Chrome extension</a></li>
+<li><a href="https://learn.chatgpt.com/docs/computer-use">Computer Use</a></li>
+<li><a href="https://learn.chatgpt.com/docs/environments/local-environment">Local environments</a></li>
+<li><a href="https://learn.chatgpt.com/docs/environments/git-worktrees">Git Worktrees</a></li>
+<li><a href="https://learn.chatgpt.com/docs/code-review">Code review</a></li>
+</ul>
+<blockquote>
+<p>外部文档可能随产品更新。课程发布前应重新打开官方页面，核对入口名称、权限说明与快捷键。</p>
+</blockquote>
+
+</main>
+</body>
+</html>

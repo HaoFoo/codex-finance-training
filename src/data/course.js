@@ -193,10 +193,4 @@ export const resourceLinks = [
     href: "https://www.feishu.cn/community/prompts?id=7649306513806216122&from=ug_from_subscribe_update",
     label: "查看飞书指南",
   },
-  {
-    title: "财运学院",
-    description: "GitHub 与科学上网课程统一从 Finance Learning Hub 进入。",
-    href: "internal-learning-hub",
-    label: "进入学习中心",
-  },
 ];

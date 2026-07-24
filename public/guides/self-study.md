@@ -28,7 +28,7 @@
 
 **输入**
 
-- `public/labs/01-operating-metrics.csv`
+- `01-operating-metrics.csv`
 
 **动作**
 
@@ -160,7 +160,7 @@
 **首选入口**
 
 - [瓶子星球 Skill 市场](https://skills.ijovo.com/)
-- [Finance Learning Hub](internal-learning-hub)：GitHub 与科学上网课程
+- Finance Learning Hub（内部学习中心）：GitHub 与科学上网课程；入口不对外公开，见内部群公告
 
 **评估练习**
 

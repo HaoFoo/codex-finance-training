@@ -19,7 +19,7 @@
 2. 复制并运行至少一个课程 Prompt。
 3. 检查 Codex 的计划、工具调用和文件修改。
 4. 产出一个本地成果或飞书成果。
-5. 能够说出“Task、Skill、Plugin、MCP、Subagent”之间的区别，并知道出现不确定性时如何让 Codex先检查、再执行。
+5. 能够说出“Task、Skill、Plugin、MCP、Subagent”之间的区别，并知道出现不确定性时如何让 Codex 先检查、再执行。
 
 ## 网站信息架构
 
@@ -174,7 +174,7 @@
 
 **Skill 生命周期**
 
-1. **调用**：在 Prompt 中明确点名 Skill，或让 Codex根据任务自动选择匹配 Skill。
+1. **调用**：在 Prompt 中明确点名 Skill，或让 Codex 根据任务自动选择匹配 Skill。
 2. **发现**：优先访问[瓶子星球 Skill 市场](https://skills.ijovo.com/)；需要扩展时再到 GitHub 搜索。
 3. **评估**：检查作者、README、更新时间、依赖、权限、脚本内容和影响范围。
 4. **安装**：让 Codex 阅读安装说明并复述将要改变的文件，再执行安装。

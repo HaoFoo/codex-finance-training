@@ -2,7 +2,7 @@
 
 ## 使用方式
 
-以下 Prompt 已按课程模拟文件设计，可在 Codex Desktop 中直接复制。运行前请确认当前 Workspace 包含 `public/labs/`，且所有输入均为课程模拟数据。
+以下 Prompt 已按课程模拟文件设计，可在 Codex Desktop 中直接复制。运行前请确认当前 Workspace 就是解压后的 `codex-labs` 课程材料文件夹，且所有输入均为课程模拟数据。
 
 通用规则：
 
@@ -20,7 +20,7 @@
 目标：确认这里是否具备完成“2026 年 6 月月度经营复盘”所需的模拟材料。
 
 请完成：
-1. 列出 `public/labs/` 下的全部文件；
+1. 列出当前 Workspace 中的全部文件；
 2. 用一句话说明每个文件的用途；
 3. 标记无法读取、字段不清或可能存在口径冲突的文件；
 4. 说明你计划使用哪些 Skill 或工具；
@@ -36,7 +36,7 @@
 ## 01｜第一次跟做：经营指标摘要
 
 ```text
-目标：把 `public/labs/01-operating-metrics.csv` 整理成一页中文经营指标摘要，供管理层在 3 分钟内阅读。
+目标：把 `01-operating-metrics.csv` 整理成一页中文经营指标摘要，供管理层在 3 分钟内阅读。
 
 工作方式：
 1. 先检查 CSV 的编码、字段、期间、单位、空值和重复记录；
@@ -83,12 +83,12 @@
 目标：使用课程模拟材料，完成“2026 年 6 月月度经营复盘”，形成可供管理层审阅的中文材料。
 
 输入范围仅限：
-- `public/labs/01-operating-metrics.csv`
-- `public/labs/02-budget-variance.csv`
-- `public/labs/03-contract-risk.md`
-- `public/labs/04-tax-items.md`
-- `public/labs/05-admin-procurement.md`
-- `public/labs/06-management-report-template.md`
+- `01-operating-metrics.csv`
+- `02-budget-variance.csv`
+- `03-contract-risk.md`
+- `04-tax-items.md`
+- `05-admin-procurement.md`
+- `06-management-report-template.md`
 
 请按以下阶段工作：
 
@@ -135,7 +135,7 @@
 > 适合 dry run 或课堂时间不足时使用。高风险动作仍禁止自动执行。
 
 ```text
-请读取 `public/labs/` 中编号 01 至 06 的模拟材料，完成一次月度经营复盘。
+请读取当前 Workspace 中编号 01 至 06 的模拟材料，完成一次月度经营复盘。
 
 要求：
 - 先检查数据质量与口径，再开始分析；
@@ -156,7 +156,7 @@
 请使用 Subagents 并行完成月度经营复盘。先检查当前环境是否支持 Subagents；支持时再执行，不支持则明确说明并提供顺序执行 fallback，不要假装并行。
 
 所有 Agent 共同规则：
-- 输入只限 `public/labs/` 中编号 01 至 06 的模拟文件；
+- 输入只限编号 01 至 06 的模拟文件；
 - 只读输入，不修改源文件，不访问外部系统；
 - 所有发现使用统一字段：`发现｜证据｜影响｜风险等级｜建议｜待确认`；
 - 证据必须注明文件名与字段或段落；
@@ -469,7 +469,7 @@ Skill 行为约束：
 ## 19｜飞书 Base：模拟数据写入预演
 
 ```text
-请使用 `$lark-base` 或当前环境中等价的飞书 Base Skill，读取本地模拟文件 `public/labs/07-feishu-base.json`，准备写入我指定的测试 Base。
+请使用 `$lark-base` 或当前环境中等价的飞书 Base Skill，读取本地模拟文件 `07-feishu-base.json`，准备写入我指定的测试 Base。
 
 现在只做预演，不写入。请输出：
 1. JSON 记录数和字段清单；
@@ -591,7 +591,7 @@ Skill 行为约束：
 ## 26｜岗位 Prompt：法务合同风险审阅
 
 ```text
-请以法务审阅助手身份，只读分析 `public/labs/03-contract-risk.md`。
+请以法务审阅助手身份，只读分析 `03-contract-risk.md`。
 
 输出表格：条款或事项｜原文证据｜风险类型｜风险等级｜业务影响｜修订建议｜待业务确认。
 
@@ -601,7 +601,7 @@ Skill 行为约束：
 ## 27｜岗位 Prompt：行政采购复盘
 
 ```text
-请以行政运营助手身份，结合 `public/labs/05-admin-procurement.md` 与 `public/labs/02-budget-variance.csv`，形成模拟采购复盘。
+请以行政运营助手身份，结合 `05-admin-procurement.md` 与 `02-budget-variance.csv`，形成模拟采购复盘。
 
 检查供应商、材料完整性、预算占用、交付时间、负责人和异常事项。输出：事项｜证据｜预算影响｜执行风险｜Owner｜建议期限｜待确认。不要修改源文件，不评价真实供应商。结果写入 `outputs/admin/采购执行复盘.md`。
 ```
@@ -609,7 +609,7 @@ Skill 行为约束：
 ## 28｜岗位 Prompt：财务预算差异
 
 ```text
-请以财务分析助手身份，只读分析 `public/labs/01-operating-metrics.csv` 与 `public/labs/02-budget-variance.csv`。
+请以财务分析助手身份，只读分析 `01-operating-metrics.csv` 与 `02-budget-variance.csv`。
 
 先检查期间、币种、单位、正负号、预算版本和勾稽关系，再输出：
 - 金额和比例差异最大的项目；
@@ -624,7 +624,7 @@ Skill 行为约束：
 ## 29｜岗位 Prompt：税务事项核对
 
 ```text
-请以税务事项整理助手身份，只读分析 `public/labs/04-tax-items.md`，必要时交叉读取两个 CSV。
+请以税务事项整理助手身份，只读分析 `04-tax-items.md`，必要时交叉读取两个 CSV。
 
 按主体、期间、税种或税率、发票、金额、证据、风险等级、复核动作输出待办清单。不得补造税率或作最终税务判断；信息不足时标记“待税务负责人确认”。结果写入 `outputs/tax/税务复核清单.md`。
 ```

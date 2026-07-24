@@ -103,7 +103,7 @@ export const chapterDetails = [
     liveDemo: {
       title: "现场演示",
       duration: "8 分钟",
-      action: "新建 Task，选择课程 Workspace，只读列出 public/labs 文件并复述用途。随后指出 Plan、Terminal、Diff、拉取请求和站点入口。",
+      action: "新建 Task，选择课程 Workspace，只读列出课程材料文件并复述用途。随后指出 Plan、Terminal、Diff、拉取请求和站点入口。",
       promptReference: "Prompt Pack 00｜只读检查 Workspace",
       success: "学员能独立选择正确目录，并让 Codex 在不修改文件的前提下完成一次只读检查。",
     },
@@ -158,7 +158,7 @@ export const chapterDetails = [
       title: "常见误区与边界",
       items: [
         "使用“优化一下”“更专业一点”等不可验证的反馈。",
-        "把原因推断写成数据事实，或在材料缺失时要求 Codex自行补齐。",
+        "把原因推断写成数据事实，或在材料缺失时要求 Codex 自行补齐。",
         "交付格式写得很细，却没有规定数字和结论怎样复核。",
       ],
     },

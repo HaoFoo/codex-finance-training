@@ -35,9 +35,9 @@
   - 课前检查页
   - Prompt Pack
   - 内部 Skill 市场 `https://skills.ijovo.com/`
-  - Finance Learning Hub `internal-learning-hub`
+  - Finance Learning Hub（内部学习中心，入口见内部群公告）
   - 飞书测试文档与测试 Base
-- 打开本地实验目录 `public/labs/`。
+- 打开本地课程材料文件夹 `codex-labs/`。
 - 将 `outputs/` 目录清空或使用新的演示输出目录；不要删除学员文件。
 - 准备计时器，设置 5 分钟、25 分钟、65 分钟三个提醒点。
 
@@ -145,7 +145,7 @@
 
 ### 演示动作
 
-1. 打开 `public/labs/01-operating-metrics.csv`。
+1. 打开 `01-operating-metrics.csv`。
 2. 从 Prompt Pack 复制“第一次跟做：经营指标摘要”。
 3. 强调三条护栏：只读源文件、缺失信息不猜、结果写入新文件。
 4. 运行后打开生成的 Markdown，现场追问：
@@ -264,7 +264,7 @@
 
 ### 讲师话术
 
-> Skill 是一套可复用工作方法；Plugin 是一组能力的打包；MCP 让 Codex连接外部工具。Superpowers 是 GitHub 上的第三方 Skills / Plugin 项目，它提供 brainstorming、planning 和系统化执行等 workflow，不是 Codex 内置功能。
+> Skill 是一套可复用工作方法；Plugin 是一组能力的打包；MCP 让 Codex 连接外部工具。Superpowers 是 GitHub 上的第三方 Skills / Plugin 项目，它提供 brainstorming、planning 和系统化执行等 workflow，不是 Codex 内置功能。
 
 ### 演示动作 A：内部 Skill 市场
 

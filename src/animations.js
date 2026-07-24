@@ -34,31 +34,86 @@ const MOTION_TARGETS = [
   ".closing-section > div",
 ].join(",");
 
+const RICH_TONE_CYCLE = [
+  "silver", "silver", "green", "silver", "sky", "silver",
+  "silver", "amber", "silver", "violet", "silver", "silver",
+];
+const CALM_TONE_CYCLE = [
+  "silver", "silver", "green", "silver", "silver", "silver",
+  "silver", "silver", "sky", "silver", "silver", "silver",
+];
+const OPENING_PUNCT = "\u201c\u2018\u300e\u300c\uff08\u300a([{";
+const CLOSING_PUNCT = "\uff0c\u3002\u3001\uff1b\uff1a\uff01\uff1f\u2026\u2014\uff5e\u201d\u2019\u300f\u300d\uff09\u300b,.;:!?)]}%";
+const WORD_CHAR = /[A-Za-z0-9@#&+._\-]/;
+
+// \u9010\u5b57 span \u4f1a\u8ba9\u6d4f\u89c8\u5668\u7684\u907f\u5934\u70b9\u89c4\u5219\u5931\u6548\uff0c\u5148\u6309\u201c\u8bcd + \u4f9d\u9644\u6807\u70b9\u201d\u5206\u7ec4\uff0c
+// \u7ec4\u5185\u4e0d\u6362\u884c\uff0c\u6807\u70b9\u5c31\u6c38\u8fdc\u4e0d\u4f1a\u843d\u5728\u884c\u9996\u3002
+function tokenizeTitleText(text) {
+  const tokens = [];
+  let pendingPrefix = [];
+
+  Array.from(text).forEach((character) => {
+    if (!character.trim()) {
+      if (pendingPrefix.length) {
+        tokens.push({ chars: pendingPrefix });
+        pendingPrefix = [];
+      }
+      tokens.push({ space: true });
+      return;
+    }
+    if (OPENING_PUNCT.includes(character)) {
+      pendingPrefix.push(character);
+      return;
+    }
+    const last = tokens[tokens.length - 1];
+    if (CLOSING_PUNCT.includes(character) && last && !last.space && !pendingPrefix.length) {
+      last.chars.push(character);
+      return;
+    }
+    if (WORD_CHAR.test(character) && last?.word && !pendingPrefix.length) {
+      last.chars.push(character);
+      return;
+    }
+    tokens.push({ word: WORD_CHAR.test(character), chars: [...pendingPrefix, character] });
+    pendingPrefix = [];
+  });
+
+  if (pendingPrefix.length) tokens.push({ chars: pendingPrefix });
+  return tokens;
+}
+
 function prepareKineticTitles(root) {
   const snapshots = [];
   const titles = Array.from(root.querySelectorAll("[data-scene] h1, [data-scene] h2"));
-  const toneCycle = [
-    "silver", "silver", "green", "silver", "sky", "silver",
-    "silver", "amber", "silver", "violet", "silver", "silver",
-  ];
+
+  const makeCharSpan = (character, glyphState) => {
+    const span = document.createElement("span");
+    span.className = character.trim()
+      ? "kinetic-title__char"
+      : "kinetic-title__char is-space";
+    span.dataset.kineticChar = "";
+    span.setAttribute("aria-hidden", "true");
+    if (character.trim()) {
+      span.dataset.tone = glyphState.cycle[glyphState.index % glyphState.cycle.length];
+      glyphState.index += 1;
+    }
+    span.textContent = character === " " ? "\u00a0" : character;
+    return span;
+  };
 
   const wrapTextNodes = (node, glyphState) => {
     Array.from(node.childNodes).forEach((child) => {
       if (child.nodeType === 3) {
         const fragment = document.createDocumentFragment();
-        Array.from(child.textContent || "").forEach((character) => {
-          const span = document.createElement("span");
-          span.className = character.trim()
-            ? "kinetic-title__char"
-            : "kinetic-title__char is-space";
-          span.dataset.kineticChar = "";
-          span.setAttribute("aria-hidden", "true");
-          if (character.trim()) {
-            span.dataset.tone = toneCycle[glyphState.index % toneCycle.length];
-            glyphState.index += 1;
+        tokenizeTitleText(child.textContent || "").forEach((token) => {
+          if (token.space) {
+            fragment.appendChild(makeCharSpan(" ", glyphState));
+            return;
           }
-          span.textContent = character === " " ? "\u00a0" : character;
-          fragment.appendChild(span);
+          const word = document.createElement("span");
+          word.className = "kinetic-title__word";
+          token.chars.forEach((character) => word.appendChild(makeCharSpan(character, glyphState)));
+          fragment.appendChild(word);
         });
         child.replaceWith(fragment);
         return;
@@ -78,7 +133,11 @@ function prepareKineticTitles(root) {
     snapshots.push({ title, originalHtml, originalAriaLabel });
     title.dataset.kineticTitle = String(index);
     if (label) title.setAttribute("aria-label", label);
-    wrapTextNodes(title, { index: 0 });
+    wrapTextNodes(title, {
+      index: 0,
+      // \u5f69\u8272\u5b57\u7b26\u53ea\u5728\u9996\u5c4f\u5927\u6807\u9898\u4e0a\u5168\u91cf\u51fa\u73b0\uff0c\u5176\u4f59\u7ae0\u8282\u6807\u9898\u4fdd\u6301\u201c\u91cd\u97f3\u201d\u7ea7\u70b9\u7f00
+      cycle: title.closest("#overview") ? RICH_TONE_CYCLE : CALM_TONE_CYCLE,
+    });
   });
 
   return () => {
@@ -284,8 +343,9 @@ export function useCourseAnimations(rootRef) {
         );
       }
 
+      const heroLoopTweens = [];
       heroFlowLayers.forEach((layer, index) => {
-        gsap.fromTo(
+        heroLoopTweens.push(gsap.fromTo(
           layer,
           {
             autoAlpha: index === 0 ? 0.18 : 0.1,
@@ -300,8 +360,8 @@ export function useCourseAnimations(rootRef) {
             repeat: -1,
             ease: "none",
           },
-        );
-        gsap.to(layer, {
+        ));
+        heroLoopTweens.push(gsap.to(layer, {
           xPercent: index === 0 ? 1.8 : -1.2,
           yPercent: index === 0 ? -0.8 : 1.1,
           scale: index === 0 ? 1.018 : 1.012,
@@ -309,8 +369,18 @@ export function useCourseAnimations(rootRef) {
           repeat: -1,
           yoyo: true,
           ease: "sine.inOut",
-        });
+        }));
       });
+      if (heroLoopTweens.length) {
+        ScrollTrigger.create({
+          trigger: "#overview",
+          start: "top bottom",
+          end: "bottom top",
+          onToggle: (self) => heroLoopTweens.forEach(
+            (tween) => (self.isActive ? tween.play() : tween.pause()),
+          ),
+        });
+      }
 
       selectAll("[data-kinetic-title]")
         .filter((title) => !title.closest("#overview") && !title.closest(".capability-panel"))
@@ -359,13 +429,19 @@ export function useCourseAnimations(rootRef) {
           }, 0.42);
 
         if (closingButton) {
-          gsap.to(closingButton, {
+          const pulse = gsap.to(closingButton, {
             scale: 1.035,
             boxShadow: "0 0 0 14px rgba(10, 228, 72, 0.05), 0 18px 60px rgba(10, 228, 72, 0.3)",
             duration: 1.2,
             repeat: -1,
             yoyo: true,
             ease: "sine.inOut",
+          });
+          ScrollTrigger.create({
+            trigger: closing,
+            start: "top bottom",
+            end: "bottom top",
+            onToggle: (self) => (self.isActive ? pulse.play() : pulse.pause()),
           });
         }
       }
@@ -999,7 +1075,30 @@ export function useCourseAnimations(rootRef) {
       });
     }, root);
 
+    // 兜底：动画把内容藏在 opacity 0 后面，如果 rAF 被系统节流导致 GSAP
+    // 停摆（省电模式、投影扩展屏等），3 秒内没有任何帧就整体回退为静态可见。
+    let lastFrame = gsap.ticker.frame;
+    let stalledChecks = 0;
+    const watchdog = window.setInterval(() => {
+      if (document.visibilityState !== "visible") {
+        lastFrame = gsap.ticker.frame;
+        stalledChecks = 0;
+        return;
+      }
+      if (gsap.ticker.frame === lastFrame) {
+        stalledChecks += 1;
+        if (stalledChecks >= 2) {
+          window.clearInterval(watchdog);
+          context.revert();
+        }
+        return;
+      }
+      lastFrame = gsap.ticker.frame;
+      stalledChecks = 0;
+    }, 1500);
+
     return () => {
+      window.clearInterval(watchdog);
       imageListeners.forEach(([image, listener]) => {
         image.removeEventListener("load", listener);
         image.removeEventListener("error", listener);
