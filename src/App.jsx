@@ -463,7 +463,7 @@ export function App() {
         </div>
       </section>
 
-      <section className="closing-section" data-scene="closing">
+      <section id="closing" className="closing-section" data-scene="closing">
         <div data-reveal>
           <span className="eyebrow">课程结束 · 行动开始</span>
           <h2>今天不是课程的终点。<br />是你和 Codex 一起交付的起点。</h2>
