@@ -8,7 +8,7 @@ export function CapabilityRail() {
           <span className="section-index">进阶能力</span>
           <h2>不是只有<br />Superpowers<br />和 Subagents</h2>
           <p>Codex 是一套从任务定义、能力扩展、外部连接到自动交付的完整工作系统。</p>
-          <span className="scroll-hint">继续滚动，横向展开能力地图</span>
+          <span className="scroll-hint">继续向下，逐一展开每一种能力</span>
         </div>
 
         {capabilities.map((capability) => {
