@@ -14,7 +14,6 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { useCourseAnimations } from "./animations";
 import { CapabilityManual } from "./components/CapabilityManual";
-import { CosmicField } from "./components/CosmicField";
 import { CapabilityRail } from "./components/CapabilityRail";
 import { ChapterDetailBlock } from "./components/ChapterDetailBlock";
 import { Header } from "./components/Header";
@@ -110,24 +109,23 @@ export function App() {
         <div className="hero-media" data-hero-visual>
           <img
             className="hero-visual hero-visual--base"
-            src={`${base}assets/hero-orbital-workflow-v1.webp`}
-            alt="星空中的银白晶体核心与绿色能量轨道，象征 Codex 财运智能工作流"
+            src={`${base}assets/hero-bright-workflow-v3.webp`}
+            alt="高亮银白玻璃工作流从 Codex 对话连接到管理层汇报"
           />
           <img
             className="hero-visual hero-visual--flow hero-visual--flow-a"
             data-hero-flow
-            src={`${base}assets/hero-orbital-workflow-v1.webp`}
+            src={`${base}assets/hero-bright-workflow-v3.webp`}
             alt=""
             aria-hidden="true"
           />
           <img
             className="hero-visual hero-visual--flow hero-visual--flow-b"
             data-hero-flow
-            src={`${base}assets/hero-orbital-workflow-v1.webp`}
+            src={`${base}assets/hero-bright-workflow-v3.webp`}
             alt=""
             aria-hidden="true"
           />
-          <CosmicField className="cosmic-field" />
         </div>
         <div className="hero-copy" data-hero-copy>
           <span className="eyebrow">财运学院 · AI 实践课</span>
@@ -142,6 +140,11 @@ export function App() {
               <ArrowDown size={18} /> 滚动探索
             </button>
           </div>
+        </div>
+        <div className="hero-meta" data-hero-copy>
+          <span>90 分钟</span>
+          <span>线下实操</span>
+          <span>Mac 现场演示</span>
         </div>
       </section>
 

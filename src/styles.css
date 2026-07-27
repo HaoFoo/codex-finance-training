@@ -326,14 +326,6 @@ img {
   pointer-events: none;
 }
 
-/* 宇宙粒子层：叠在封面图之上、文案之下（.hero-media 本身 z-index:-1，整体仍在文字下方） */
-.cosmic-field {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-}
-
 .hero-copy {
   width: min(65vw, 900px);
 }
@@ -637,28 +629,31 @@ img {
   background: var(--silver);
 }
 
-/* 能力区改为纵向静态堆叠（不再横向滚动/pin） */
 .capability-viewport {
   width: 100%;
-  overflow: visible;
+  min-height: 100svh;
+  overflow: hidden;
 }
 
 .capability-track {
-  width: 100%;
-  display: block;
+  width: max-content;
+  min-height: 100svh;
+  display: flex;
+  align-items: stretch;
 }
 
 .capability-panel {
-  width: 100%;
-  padding: clamp(72px, 8vw, 128px) var(--page-x);
+  width: min(78vw, 900px);
+  min-height: 100svh;
+  padding: clamp(110px, 10vw, 160px) clamp(36px, 6vw, 92px);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-bottom: 1px solid var(--line);
+  border-right: 1px solid rgba(10, 13, 12, 0.12);
 }
 
 .capability-intro {
-  width: 100%;
+  width: min(92vw, 1120px);
   background: #f4f6f3;
 }
 
@@ -1438,65 +1433,34 @@ footer {
   opacity: 1;
   filter: none;
   mix-blend-mode: normal;
-  background: #020404;
-  transform-origin: 72% 52%;
 }
 
 .hero-visual--base {
   z-index: 0;
-  object-position: 50% center;
-  will-change: transform;
 }
 
 .hero-visual--flow {
   z-index: 1;
-  opacity: 0;
-  object-position: 50% center;
+  opacity: 0.55;
+  filter: brightness(1.9) contrast(1.18) saturate(1.75);
   mix-blend-mode: screen;
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
-  will-change: transform, opacity, filter;
+  will-change: transform, opacity, -webkit-mask-position, mask-position;
 }
 
 .hero-visual--flow-a {
-  --orbit-angle: 0deg;
-  filter: brightness(2.05) contrast(1.15) saturate(1.5);
-  -webkit-mask-image: conic-gradient(
-    from var(--orbit-angle) at 78% 51%,
-    transparent 0deg,
-    transparent 302deg,
-    rgba(255, 255, 255, 0.08) 317deg,
-    #fff 338deg,
-    transparent 358deg
-  );
-  mask-image: conic-gradient(
-    from var(--orbit-angle) at 78% 51%,
-    transparent 0deg,
-    transparent 302deg,
-    rgba(255, 255, 255, 0.08) 317deg,
-    #fff 338deg,
-    transparent 358deg
-  );
+  -webkit-mask-image: linear-gradient(104deg, transparent 0%, transparent 40%, #fff 49%, transparent 58%, transparent 100%);
+  mask-image: linear-gradient(104deg, transparent 0%, transparent 40%, #fff 49%, transparent 58%, transparent 100%);
+  -webkit-mask-size: 38% 100%;
+  mask-size: 38% 100%;
 }
 
 .hero-visual--flow-b {
-  filter: brightness(1.7) contrast(1.12) saturate(1.24);
-  -webkit-mask-image: radial-gradient(
-    ellipse 22% 34% at 77% 49%,
-    transparent 0%,
-    rgba(255, 255, 255, 0.22) 34%,
-    #fff 58%,
-    rgba(255, 255, 255, 0.3) 78%,
-    transparent 100%
-  );
-  mask-image: radial-gradient(
-    ellipse 22% 34% at 77% 49%,
-    transparent 0%,
-    rgba(255, 255, 255, 0.22) 34%,
-    #fff 58%,
-    rgba(255, 255, 255, 0.3) 78%,
-    transparent 100%
-  );
+  -webkit-mask-image: linear-gradient(76deg, transparent 0%, transparent 43%, #fff 50%, transparent 57%, transparent 100%);
+  mask-image: linear-gradient(76deg, transparent 0%, transparent 43%, #fff 50%, transparent 57%, transparent 100%);
+  -webkit-mask-size: 29% 100%;
+  mask-size: 29% 100%;
 }
 
 .kinetic-title__word {
@@ -2223,16 +2187,6 @@ footer {
 
   .hero-visual {
     object-position: 67% center;
-  }
-
-  .hero-visual--flow-a {
-    -webkit-mask-image: conic-gradient(from var(--orbit-angle) at 83% 51%, transparent 0deg, transparent 302deg, rgba(255, 255, 255, 0.08) 317deg, #fff 338deg, transparent 358deg);
-    mask-image: conic-gradient(from var(--orbit-angle) at 83% 51%, transparent 0deg, transparent 302deg, rgba(255, 255, 255, 0.08) 317deg, #fff 338deg, transparent 358deg);
-  }
-
-  .hero-visual--flow-b {
-    -webkit-mask-image: radial-gradient(ellipse 28% 35% at 83% 49%, transparent 0%, rgba(255, 255, 255, 0.22) 34%, #fff 58%, rgba(255, 255, 255, 0.3) 78%, transparent 100%);
-    mask-image: radial-gradient(ellipse 28% 35% at 83% 49%, transparent 0%, rgba(255, 255, 255, 0.22) 34%, #fff 58%, rgba(255, 255, 255, 0.3) 78%, transparent 100%);
   }
 
   .hero-copy {
