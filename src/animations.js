@@ -255,12 +255,11 @@ export function useCourseAnimations(rootRef) {
         return gsap.fromTo(
           characters,
           {
-            // 位移收窄，避免长标题（多行）飞入时字符跨行重叠错乱；仍保留 elastic 弹跳感
             autoAlpha: 0,
-            x: (index) => ((index % 5) - 2) * 6,
-            yPercent: (index) => (index % 2 ? 40 : -36),
-            rotation: (index) => (index % 2 ? 7 : -6),
-            scale: (index) => (index % 3 ? 0.9 : 1.06),
+            x: (index) => ((index % 5) - 2) * 11,
+            yPercent: (index) => (index % 2 ? 128 : -112),
+            rotation: (index) => (index % 2 ? 16 : -14),
+            scale: (index) => (index % 3 ? 0.72 : 1.18),
           },
           {
             autoAlpha: 1,
@@ -268,9 +267,9 @@ export function useCourseAnimations(rootRef) {
             yPercent: 0,
             rotation: 0,
             scale: 1,
-            duration: 1.1,
+            duration: 1.24,
             stagger: { each: 0.026, from: "edges" },
-            ease: "elastic.out(1, 0.6)",
+            ease: "elastic.out(1, 0.52)",
             scrollTrigger: {
               trigger,
               start: "top 86%",
@@ -400,7 +399,7 @@ export function useCourseAnimations(rootRef) {
         });
       };
 
-      // 中间章节标题弹入落定后转成克制的“呼吸”：小幅上浮 + 轻微缩放、从中心平滑往复，无落地弹跳、不重叠
+      // 其他章节标题的持续动效更克制：小幅上浮 + 轻微缩放的“呼吸感”，从中心平滑荡开，不带落地弹跳
       const perpetualTitleBreath = (chars) => {
         if (!chars?.length) return null;
         return gsap.to(chars, {
@@ -428,14 +427,12 @@ export function useCourseAnimations(rootRef) {
         .filter((title) => !title.closest("#overview") && !title.closest(".capability-panel"))
         .forEach((title) => {
           animateKineticTitle(title, title);
-          // 结尾大标题用持续弹跳（下方单独处理），不叠加呼吸
-          if (title.closest("#closing")) return;
           const breath = perpetualTitleBreath(gsap.utils.toArray("[data-kinetic-char]", title));
           if (breath) {
-            // 弹入基本落定后再开始呼吸；标题只在视口内动，滚出即停
+            // 入场弹入落定后再开始呼吸；标题只在视口内动，滚出即停
             ScrollTrigger.create({
               trigger: title,
-              start: "top 55%",
+              start: "top 62%",
               end: "bottom top",
               onEnter: () => breath.play(),
               onEnterBack: () => breath.play(),
